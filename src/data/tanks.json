@@ -1,0 +1,29 @@
+[
+  {
+    "id": "c_RaFvpH-R0",
+    "name": "t-34-85-zis",
+    "imgs": [
+      "/tanks/t-34-85-zis_1.png",
+      "/tanks/t-34-85-zis_2.png",
+      "/tanks/t-34-85-zis_3.png"
+    ]
+  },
+  {
+    "id": "kgHBFSSen90",
+    "name": "tiger-h1",
+    "imgs": [
+      "/tanks/tiger-h1_1.png",
+      "/tanks/tiger-h1_2.png",
+      "/tanks/tiger-h1_3.png"
+    ]
+  },
+  {
+    "id": "gHAPRU72si0",
+    "name": "m4a3e2-76-jumbo",
+    "imgs": [
+      "/tanks/m4a3e2-76-jumbo_1.png",
+      "/tanks/m4a3e2-76-jumbo_2.png",
+      "/tanks/m4a3e2-76-jumbo_3.png"
+    ]
+  }
+]
