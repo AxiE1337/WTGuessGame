@@ -10,22 +10,21 @@ interface ITank {
 function GuessScreen({ tank }: ITank) {
   const [imgIndex, setImgIndex] = useState<number>(0)
   const [inputValue, setInputValue] = useState<string>('')
-  const [guesses, setGuesses] = useState<number>(tank.imgs.length - 1)
-  const addTank = useStore((state) => state.addTank)
+  const { updateTank, tanks } = useStore((state) => state)
+  const value = tanks.find((t) => t.id === tank.id)?.guesses as number
+  const [guesses, setGuesses] = useState<number>(value)
   const router = useRouter()
 
   const skipHandler = () => {
     if (imgIndex < tank.imgs.length - 1) {
       setImgIndex((prev) => prev + 1)
       setGuesses((prev) => prev - 1)
-      addTank({
-        id: tank.id,
-        guesses: guesses,
-      })
-    } else {
-      addTank({
+      updateTank({ id: tank.id, guesses: guesses - 1 })
+    }
+    if (guesses - 1 < 1) {
+      updateTank({
         id: tank.id.slice(0, tank.id.length - 1) + '0',
-        guesses: guesses,
+        guesses: guesses - 1,
       })
       router.reload()
     }
@@ -36,10 +35,10 @@ function GuessScreen({ tank }: ITank) {
     if (!isWin) {
       skipHandler()
     } else {
-      addTank({
+      updateTank({
         id: tank.id.slice(0, tank.id.length - 1) + '1',
         guesses: guesses,
-        name: tank.name,
+        name: inputValue,
       })
       router.reload()
     }

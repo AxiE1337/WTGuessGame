@@ -6,7 +6,7 @@ import GuessScreen from '../components/GuessScreen'
 
 interface ITanks {
   id: string
-  guesses: number
+  guesses?: number
   name?: string
 }
 interface ITank {
@@ -19,10 +19,14 @@ export default function Guessatank() {
   const [loading, setLoading] = useState<boolean>(true)
   const [dataStore, setData] = useState<ITanks[]>([])
   const [current, setCurrent] = useState<ITank>({ id: '', name: '', imgs: [] })
-  const tanksDataStore = useStore((state) => state.tanks)
+  const { tanks: tanksDataStore, addTank } = useStore((state) => state)
 
   const playHandler = (id: string) => {
     const tank = tanksDataJson.find((t) => t.id === id) as ITank
+    const isHas = tanksDataStore.find((t) => t.id === id)
+    if (!isHas) {
+      addTank({ id: tank.id, guesses: tank.imgs.length })
+    }
     setCurrent(tank)
   }
 
