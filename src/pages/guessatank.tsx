@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useStore } from '../store/index'
 import tanksDataJson from '../data/tanks.json'
-import TankComponent from '../components/TankComponent'
+import ItemBar from '../components/ItemBar'
 import GuessScreen from '../components/GuessScreen'
 
 interface ITanks {
@@ -39,15 +39,15 @@ export default function Guessatank() {
     return <h1>Loading...</h1>
   }
   if (current.id) {
-    return <GuessScreen tank={current} />
+    return <GuessScreen item={current} />
   }
 
   return (
     <div className='flex flex-col h-screen items-center justify-center'>
       <h1>guessatank</h1>
       {tanksDataJson.map((tank, index) => (
-        <TankComponent
-          tank={tank}
+        <ItemBar
+          item={tank}
           dataStore={dataStore}
           index={index}
           play={playHandler}
