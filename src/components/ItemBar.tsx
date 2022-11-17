@@ -36,7 +36,7 @@ function ItemBar({ item, dataStore, play, index }: IItem) {
       return 'loss'
     }
     if (updatedItem?.guesses === undefined) {
-      return 'unplayed'
+      return ''
     }
     return ''
   }
@@ -44,10 +44,10 @@ function ItemBar({ item, dataStore, play, index }: IItem) {
   return (
     <>
       <div
-        className={`flex w-4/6 items-center justify-between mt-2 ${color()}`}
+        className={`flex w-4/6 h-16 rounded items-center justify-between mt-2 ${color()}`}
       >
         <p>#{index + 1}</p>
-        <div className='flex w-40 h-12 items-center justify-between'>
+        <div className='flex items-center justify-between gap-4 pr-2'>
           <h1>{gameState()}</h1>
           <p>
             {updatedItem?.guesses &&
@@ -58,7 +58,7 @@ function ItemBar({ item, dataStore, play, index }: IItem) {
               {updatedItem.name ? `Right answer ${updatedItem.name}` : 'loss'}
             </h1>
           )}
-          {gameState() === ('unplayed' && '') && (
+          {gameState() === '' && (
             <button className='btn' onClick={() => play(item.id)}>
               play
             </button>

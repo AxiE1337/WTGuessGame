@@ -2,6 +2,8 @@ import React, { memo, useState } from 'react'
 import Image from 'next/image'
 import { useStore } from '../store/index'
 import { useRouter } from 'next/router'
+import Input from './ui/Input'
+import tanksAutocomplete from '../data/tanks.json'
 
 interface IItem {
   item: { id: string; name: string; imgs: string[] }
@@ -55,10 +57,10 @@ function GuessScreen({ item }: IItem) {
         />
       </div>
       <div>
-        <input
-          type='text'
-          onChange={(e) => setInputValue(e.target.value)}
+        <Input
           value={inputValue}
+          onChange={setInputValue}
+          autocomplete={tanksAutocomplete.map((item) => item.name)}
         />
         <button className='btn' onClick={submitHandler}>
           Submit
