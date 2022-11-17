@@ -35,9 +35,6 @@ function ItemBar({ item, dataStore, play, index }: IItem) {
     if (updatedItem?.guesses === 0) {
       return 'loss'
     }
-    if (updatedItem?.guesses === undefined) {
-      return ''
-    }
     return ''
   }
 
@@ -48,6 +45,7 @@ function ItemBar({ item, dataStore, play, index }: IItem) {
       >
         <p>#{index + 1}</p>
         <div className='flex items-center justify-between gap-4 pr-2'>
+          <h1>{!updatedItem?.guesses && 'unplayed'}</h1>
           <h1>{gameState()}</h1>
           <p>
             {updatedItem?.guesses &&

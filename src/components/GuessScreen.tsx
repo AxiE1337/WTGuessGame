@@ -48,12 +48,12 @@ function GuessScreen({ item }: IItem) {
 
   return (
     <div className='flex flex-col h-screen items-center justify-center'>
-      <div className='w-60 h-60 bg-slate-500'>
+      <div className='bg-slate-500'>
         <Image
           alt={item.id}
           src={item.imgs[imgIndex]}
-          width={600}
-          height={1200}
+          width={800}
+          height={450}
         />
       </div>
       <div>
@@ -62,6 +62,7 @@ function GuessScreen({ item }: IItem) {
           onChange={setInputValue}
           autocomplete={tanksAutocomplete.map((item) => item.name)}
         />
+        <h1>Guesses remaining{guesses}</h1>
         <button className='btn' onClick={submitHandler}>
           Submit
         </button>
@@ -69,7 +70,6 @@ function GuessScreen({ item }: IItem) {
           Skip
         </button>
       </div>
-      <h1>Guesses remaining{guesses}</h1>
     </div>
   )
 }
