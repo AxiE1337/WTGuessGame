@@ -3,13 +3,14 @@ import { persist } from 'zustand/middleware'
 
 interface ITanks {
   id: string
-  guesses?: number
+  guesses: number
   name?: string
 }
 
 interface IData {
   tanks: ITanks[]
   maps: string[]
+  points: number
   addTank: (tank: ITanks) => void
   updateTank: (tank: ITanks) => void
 }
@@ -19,6 +20,7 @@ export const useStore = create<IData>()(
     (set, get) => ({
       tanks: [],
       maps: [],
+      points: 0,
       addTank: (tank) => {
         set(({ tanks }) => ({ tanks: [...tanks, tank] }))
       },
@@ -29,10 +31,18 @@ export const useStore = create<IData>()(
             t.id.slice(0, t.id.length - 1) ===
             tank.id.slice(0, tank.id.length - 1)
         )
+        const getPoints = state.tanks.reduce((prev: any, next) => {
+          if (next.name) {
+            return prev + next.guesses
+          }
+          return prev
+        }, 0)
+
         //updating values
         const toUpdate = [...state.tanks]
         toUpdate[index] = tank
         set(() => ({ tanks: toUpdate }))
+        set(() => ({ points: getPoints }))
       },
     }),
     {

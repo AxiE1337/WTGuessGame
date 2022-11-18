@@ -8,6 +8,8 @@ interface IInput {
 
 function Input({ value, autocomplete, onChange }: IInput) {
   const [isShown, setIsShown] = useState<boolean>(false)
+  const [selectIndex, setSelectIndex] = useState<number>(0)
+
   const autocompleteHandler = (item: string) => {
     onChange(item)
     setIsShown(false)
@@ -20,12 +22,26 @@ function Input({ value, autocomplete, onChange }: IInput) {
       setIsShown(false)
     }
   }
+  // const selectHandler = (key: string) => {
+  //   if (key === 'ArrowUp' && isShown) {
+  //     setSelectIndex((prev) => prev - 1)
+  //   } else if (key === 'ArrowDown' && isShown) {
+  //     setSelectIndex((prev) => prev + 1)
+  //   } else if (key === 'Enter') {
+  //     setIsShown(false)
+  //     setSelectIndex(0)
+  //     const item = autocomplete && (autocomplete[selectIndex] as string)
+  //     onChange(item as string)
+  //   }
+  // }
+
   return (
     <div className='w-60 relative'>
       <input
         type='text'
         className='input w-full max-w-xs'
         onChange={(e) => onChangeHandler(e.target.value)}
+        // onKeyUp={(e) => selectHandler(e.key)}
         value={value}
       />
       {isShown && (
@@ -34,7 +50,9 @@ function Input({ value, autocomplete, onChange }: IInput) {
             ?.filter((item) => item.includes(value))
             .map((item, index) => (
               <h1
-                className='text-white cursor-pointer'
+                className={`flex items-center pl-1 text-white cursor-pointer h-10 ${
+                  selectIndex === index && 'bg-slate-400'
+                }`}
                 key={index}
                 onClick={() => autocompleteHandler(item)}
               >

@@ -2,13 +2,22 @@ import React, { memo, useEffect, useState } from 'react'
 import { useStore } from '../store/index'
 import { useRouter } from 'next/router'
 
+interface IItem {
+  id: string
+  name: string
+  guesses: number
+  imgs: string[]
+}
+
 function NavBar() {
-  const [winsTank, setWinsTank] = useState<string[]>([])
-  const store = useStore((state) => state)
+  const [winsTank, setWinsTank] = useState<IItem[]>([])
+  const [points, setPoints] = useState<number>(0)
+  const { tanks, points: storePoints } = useStore((state) => state)
   const router = useRouter()
 
   useEffect(() => {
-    setWinsTank(store.tanks.filter((t) => t.name) as any[])
+    setWinsTank(tanks.filter((t) => t.name) as IItem[])
+    setPoints(storePoints)
   }, [])
 
   return (
@@ -22,10 +31,9 @@ function NavBar() {
         </a>
       </div>
       {winsTank.length > 0 && (
-        <div className='flex-none'>
-          <h1 className='text-white'>
-            {'Guessed tanks right ' + winsTank.length}
-          </h1>
+        <div className='flex gap-4'>
+          <h1 className='text-white'>{'Guessed right ' + winsTank.length}</h1>
+          <h1 className='text-white'>{`Points ${points}`}</h1>
         </div>
       )}
     </div>

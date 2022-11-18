@@ -25,5 +25,32 @@
       "/tanks/m4a3e2-76-jumbo_2.png",
       "/tanks/m4a3e2-76-jumbo_3.png"
     ]
+  },
+  {
+    "id": "82AuKxegOq",
+    "name": "m4a3-76",
+    "imgs": [
+      "/tanks/m4a3-76_1.png",
+      "/tanks/m4a3-76_2.png",
+      "/tanks/m4a3-76_3.png"
+    ]
+  },
+  {
+    "id": "Z5UKgzGr-X",
+    "name": "m4a2-76",
+    "imgs": [
+      "/tanks/m4a2-76_1.png",
+      "/tanks/m4a2-76_2.png",
+      "/tanks/m4a2-76_3.png"
+    ]
+  },
+  {
+    "id": "af27mNYTul",
+    "name": "t-34-85-d5t",
+    "imgs": [
+      "/tanks/t-34-85-d5t_1.png",
+      "/tanks/t-34-85-d5t_2.png",
+      "/tanks/t-34-85-d5t_3.png"
+    ]
   }
 ]

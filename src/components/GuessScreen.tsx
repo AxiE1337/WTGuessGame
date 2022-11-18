@@ -36,6 +36,7 @@ function GuessScreen({ item }: IItem) {
     const isWin = item.name === inputValue
     if (!isWin) {
       skipHandler()
+      setInputValue('')
     } else {
       updateTank({
         id: item.id,

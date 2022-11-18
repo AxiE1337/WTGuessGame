@@ -21,9 +21,9 @@ function ItemBar({ item, dataStore, play, index }: IItem) {
   )
   const color = () => {
     if (updatedItem?.name) {
-      return 'bg-lime-600'
+      return 'text-lime-600'
     } else if (updatedItem?.guesses === 0) {
-      return 'bg-red-700'
+      return 'text-red-600'
     } else {
       return ''
     }
@@ -38,22 +38,37 @@ function ItemBar({ item, dataStore, play, index }: IItem) {
     return ''
   }
 
+  const autocompleteBar = () => {
+    const guesses = updatedItem?.guesses || 0
+    const number = item.imgs.length - guesses
+    const array = new Array(number).fill('', 0, number)
+    return array.map((i, index) => (
+      <div key={index} className='bg-red-800 w-2 h-2'></div>
+    ))
+  }
+
   return (
     <>
       <div
-        className={`flex w-4/6 h-16 rounded items-center justify-between mt-2 ${color()}`}
+        className={`flex w-4/6 h-16 rounded items-center justify-between mt-2 p-2 bg-slate-300`}
       >
         <p>#{index + 1}</p>
         <div className='flex items-center justify-between gap-4 pr-2'>
-          <h1>{!updatedItem?.guesses && 'unplayed'}</h1>
-          <h1>{gameState()}</h1>
+          <h1 className={`${color()} font-bold`}>{gameState()}</h1>
+          <h1>{String(updatedItem?.guesses) === 'undefined' && 'unplayed'}</h1>
+          <div className='flex gap-1'>
+            {String(updatedItem?.guesses) !== 'undefined' && autocompleteBar()}
+          </div>
+          <p>{gameState() === 'win' && `Points: ${updatedItem?.guesses}`}</p>
           <p>
-            {updatedItem?.guesses &&
+            {String(updatedItem?.guesses) !== 'undefined' &&
               `Guesses remaining: ${updatedItem?.guesses}`}
           </p>
           {updatedItem?.name && (
             <h1>
-              {updatedItem.name ? `Right answer ${updatedItem.name}` : 'loss'}
+              {updatedItem.name
+                ? `Right answer: ${updatedItem.name.toLocaleUpperCase()}`
+                : 'loss'}
             </h1>
           )}
           {gameState() === '' && (
