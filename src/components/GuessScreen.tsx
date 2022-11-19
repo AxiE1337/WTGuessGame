@@ -45,7 +45,6 @@ function GuessScreen({ item }: IItem) {
       router.reload()
     }
   }
-  console.log(item.imgs.length - guessesRemaining)
 
   return (
     <div className='flex flex-col h-screen items-center justify-center'>
@@ -54,6 +53,8 @@ function GuessScreen({ item }: IItem) {
           className='rounded-xl'
           alt={item.id}
           src={item.imgs[imgIndex]}
+          placeholder='blur'
+          blurDataURL={item.imgs[imgIndex]}
           width={800}
           height={450}
         />

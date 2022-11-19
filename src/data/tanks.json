@@ -52,5 +52,37 @@
       "/tanks/t-34-85-d5t_2.png",
       "/tanks/t-34-85-d5t_3.png"
     ]
+  },
+  {
+    "id": "k4rCTQQvs2",
+    "name": "pt-76-57",
+    "imgs": [
+      "/tanks/pt-76-57_1.png",
+      "/tanks/pt-76-57_2.png",
+      "/tanks/pt-76-57_3.png"
+    ]
+  },
+  {
+    "id": "hd8_-hxgJd",
+    "name": "t55e1",
+    "imgs": ["/tanks/t55e1_1.png", "/tanks/t55e1_2.png", "/tanks/t55e1_3.png"]
+  },
+  {
+    "id": "IMsOn7bZTF",
+    "name": "tiger-e",
+    "imgs": [
+      "/tanks/tiger-e_1.png",
+      "/tanks/tiger-e_2.png",
+      "/tanks/tiger-e_3.png"
+    ]
+  },
+  {
+    "id": "IM13OnfZTF",
+    "name": "m4a1-76",
+    "imgs": [
+      "/tanks/m4a1-76_1.png",
+      "/tanks/m4a1-76_2.png",
+      "/tanks/m4a1-76_3.png"
+    ]
   }
 ]
