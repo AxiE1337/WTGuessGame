@@ -13,20 +13,19 @@ function GuessScreen({ item }: IItem) {
   const [imgIndex, setImgIndex] = useState<number>(0)
   const [inputValue, setInputValue] = useState<string>('')
   const { updateTank, tanks } = useStore((state) => state)
-  const tankGuesses = tanks.find((t) => t.id === item.id)?.guesses as number
-  const [guesses, setGuesses] = useState<number>(tankGuesses)
+  const guessesRemaining = tanks.find((t) => t.id === item.id)
+    ?.guesses as number
   const router = useRouter()
 
   const skipHandler = () => {
     if (imgIndex < item.imgs.length - 1) {
       setImgIndex((prev) => prev + 1)
-      setGuesses((prev) => prev - 1)
-      updateTank({ id: item.id, guesses: guesses - 1 })
+      updateTank({ id: item.id, guesses: guessesRemaining - 1 })
     }
-    if (guesses - 1 < 1) {
+    if (guessesRemaining - 1 < 1) {
       updateTank({
         id: item.id,
-        guesses: guesses - 1,
+        guesses: guessesRemaining - 1,
       })
       router.reload()
     }
@@ -40,17 +39,19 @@ function GuessScreen({ item }: IItem) {
     } else {
       updateTank({
         id: item.id,
-        guesses: guesses,
+        guesses: guessesRemaining,
         name: inputValue,
       })
       router.reload()
     }
   }
+  console.log(item.imgs.length - guessesRemaining)
 
   return (
     <div className='flex flex-col h-screen items-center justify-center'>
-      <div className='bg-slate-500'>
+      <div className='bg-slate-500 rounded-xl m-4'>
         <Image
+          className='rounded-xl'
           alt={item.id}
           src={item.imgs[imgIndex]}
           width={800}
@@ -58,12 +59,24 @@ function GuessScreen({ item }: IItem) {
         />
       </div>
       <div>
+        {item.imgs.map((button, index) => (
+          <input
+            key={index}
+            type='radio'
+            name='radio-1'
+            className='radio radio-accent'
+            onClick={() => setImgIndex(index)}
+            disabled={item.imgs.length - guessesRemaining < index}
+          />
+        ))}
+      </div>
+      <div>
         <Input
           value={inputValue}
           onChange={setInputValue}
           autocomplete={tanksAutocomplete.map((item) => item.name)}
         />
-        <h1>Guesses remaining{guesses}</h1>
+        <h1>Guesses remaining{guessesRemaining}</h1>
         <button className='btn' onClick={submitHandler}>
           Submit
         </button>
