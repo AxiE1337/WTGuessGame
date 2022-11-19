@@ -11,7 +11,7 @@ export default function Home() {
         <meta name='description' content='Guess a tank/map War thunder' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <button className='btn' onClick={() => router.push('/guessatank')}>
+      <button className='btn' onClick={() => router.push('/guessthetank')}>
         tanks
       </button>
     </div>

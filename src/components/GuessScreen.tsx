@@ -2,15 +2,37 @@ import React, { memo, useState } from 'react'
 import Image from 'next/image'
 import { useStore } from '../store/index'
 import { useRouter } from 'next/router'
+import { motion, AnimatePresence } from 'framer-motion'
 import Input from './ui/Input'
 import tanksAutocomplete from '../data/tanks.json'
+
+const variants = {
+  enter: (direction: number) => {
+    return {
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 1,
+    }
+  },
+  center: {
+    zIndex: 1,
+    x: 0,
+    opacity: 1,
+  },
+  exit: (direction: number) => {
+    return {
+      zIndex: 0,
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 1,
+    }
+  },
+}
 
 interface IItem {
   item: { id: string; name: string; imgs: string[] }
 }
 
 function GuessScreen({ item }: IItem) {
-  const [imgIndex, setImgIndex] = useState<number>(0)
+  const [[imgIndex, direction], setImgIndex] = useState<number[]>([0, 0])
   const [inputValue, setInputValue] = useState<string>('')
   const { updateTank, tanks } = useStore((state) => state)
   const guessesRemaining = tanks.find((t) => t.id === item.id)
@@ -19,7 +41,7 @@ function GuessScreen({ item }: IItem) {
 
   const skipHandler = () => {
     if (imgIndex < item.imgs.length - 1) {
-      setImgIndex((prev) => prev + 1)
+      setImgIndex([imgIndex + 1, 1])
       updateTank({ id: item.id, guesses: guessesRemaining - 1 })
     }
     if (guessesRemaining - 1 < 1) {
@@ -47,26 +69,42 @@ function GuessScreen({ item }: IItem) {
   }
 
   return (
-    <div className='flex flex-col h-screen items-center justify-center'>
-      <div className='bg-slate-500 rounded-xl m-4'>
-        <Image
-          className='rounded-xl'
-          alt={item.id}
-          src={item.imgs[imgIndex]}
-          placeholder='blur'
-          blurDataURL={item.imgs[imgIndex]}
-          width={800}
-          height={450}
-        />
-      </div>
-      <div>
+    <div className='flex flex-col h-screen w-full items-center justify-center'>
+      <AnimatePresence initial={false} custom={direction}>
+        <div className='relative flex items-center justify-center h-2/4 w-4/5 overflow-hidden'>
+          <motion.div
+            key={item.imgs[imgIndex]}
+            custom={direction}
+            variants={variants}
+            initial='enter'
+            animate='center'
+            exit='exit'
+            transition={{
+              x: { type: 'spring', stiffness: 250, damping: 20 },
+              opacity: { duration: 0.2 },
+            }}
+            className='absolute bg-slate-500 rounded-xl m-4 h-auto w-auto'
+          >
+            <Image
+              className='rounded-xl'
+              alt={item.id}
+              src={item.imgs[imgIndex]}
+              placeholder='blur'
+              blurDataURL={item.imgs[imgIndex]}
+              width={800}
+              height={450}
+            />
+          </motion.div>
+        </div>
+      </AnimatePresence>
+      <div className='z-10'>
         {item.imgs.map((button, index) => (
           <input
             key={index}
             type='radio'
             name='radio-1'
-            className='radio radio-accent ml-2'
-            onClick={() => setImgIndex(index)}
+            className='radio radio-success ml-2'
+            onClick={() => setImgIndex((prev) => [index, index - prev[0]])}
             disabled={item.imgs.length - guessesRemaining < index}
           />
         ))}
