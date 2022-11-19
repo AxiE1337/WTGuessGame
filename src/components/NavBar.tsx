@@ -21,13 +21,23 @@ function NavBar() {
 
   return (
     <div className='navbar bg-slate-700'>
-      <div className='flex-1'>
-        <a
-          className='btn btn-ghost normal-case text-xl text-white'
-          onClick={() => router.push('/')}
-        >
-          Guess WT
-        </a>
+      <div className='flex-1 text-white'>
+        <div className='dropdown dropdown-hover'>
+          <label tabIndex={0} className='btn btn-ghost m-1'>
+            Go to
+          </label>
+          <ul
+            tabIndex={0}
+            className='dropdown-content menu p-1 shadow bg-slate-700 w-52'
+          >
+            <li onClick={() => router.push('/guessthetank')}>
+              <a>Guess the tank</a>
+            </li>
+            <li>
+              <a>Guess the map</a>
+            </li>
+          </ul>
+        </div>
       </div>
       {winsTank.length > 0 && (
         <div className='flex gap-4'>

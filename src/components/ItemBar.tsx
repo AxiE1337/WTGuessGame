@@ -49,13 +49,13 @@ function ItemBar({ item, dataStore, play, index }: IItem) {
 
   return (
     <>
-      <div
-        className={`flex w-4/6 h-16 rounded items-center justify-between mt-2 p-2 bg-slate-300`}
-      >
+      <div className='flex w-4/6 h-16 rounded items-center justify-between mt-2 p-2 text-white bg-sky-900 hover:scale-110 ease-out duration-300 hover:bg-sky-800'>
         <p>#{index + 1}</p>
         <div className='flex items-center justify-between gap-4 pr-2'>
           <h1 className={`${color()} font-bold`}>{gameState()}</h1>
-          <h1>{String(updatedItem?.guesses) === 'undefined' && 'unplayed'}</h1>
+          <h1 className='select-none'>
+            {String(updatedItem?.guesses) === 'undefined' && 'unplayed'}
+          </h1>
           <div className='flex gap-1'>
             {String(updatedItem?.guesses) !== 'undefined' && autocompleteBar()}
           </div>
@@ -72,7 +72,7 @@ function ItemBar({ item, dataStore, play, index }: IItem) {
             </h1>
           )}
           {gameState() === '' && (
-            <button className='btn' onClick={() => play(item.id)}>
+            <button className='btn glass' onClick={() => play(item.id)}>
               play
             </button>
           )}

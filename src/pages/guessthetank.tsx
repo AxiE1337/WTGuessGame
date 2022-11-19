@@ -44,7 +44,6 @@ export default function Guessatank() {
 
   return (
     <div className='flex flex-col h-screen items-center justify-center'>
-      <h1>guessatank</h1>
       {tanksDataJson.map((tank, index) => (
         <ItemBar
           item={tank}

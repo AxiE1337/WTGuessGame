@@ -65,7 +65,7 @@ function GuessScreen({ item }: IItem) {
             key={index}
             type='radio'
             name='radio-1'
-            className='radio radio-accent'
+            className='radio radio-accent ml-2'
             onClick={() => setImgIndex(index)}
             disabled={item.imgs.length - guessesRemaining < index}
           />
@@ -77,13 +77,17 @@ function GuessScreen({ item }: IItem) {
           onChange={setInputValue}
           autocomplete={tanksAutocomplete.map((item) => item.name)}
         />
-        <h1>Guesses remaining{guessesRemaining}</h1>
-        <button className='btn' onClick={submitHandler}>
-          Submit
-        </button>
-        <button className='btn' onClick={skipHandler}>
-          Skip
-        </button>
+        <h1 className='text-center mb-2'>
+          Guesses remaining: {guessesRemaining}
+        </h1>
+        <div className='flex items-center justify-evenly'>
+          <button className='btn' onClick={submitHandler}>
+            Submit
+          </button>
+          <button className='btn' onClick={skipHandler}>
+            Skip
+          </button>
+        </div>
       </div>
     </div>
   )

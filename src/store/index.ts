@@ -38,13 +38,13 @@ export const useStore = create<IData>()(
         set(() => ({ tanks: toUpdate }))
       },
       getPoints: () => {
-        const state = get()
-        const getPoints = state.tanks
+        const { tanks, maps } = get()
+        const getPointsTanks = tanks
           .filter((t) => t.name)
           .reduce((prev: any, next) => {
             return prev + next.guesses
           }, 0)
-        set(() => ({ points: getPoints }))
+        set(() => ({ points: getPointsTanks }))
       },
     }),
     {
