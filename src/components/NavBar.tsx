@@ -11,13 +11,12 @@ interface IItem {
 
 function NavBar() {
   const [winsTank, setWinsTank] = useState<IItem[]>([])
-  const [points, setPoints] = useState<number>(0)
-  const { tanks, points: storePoints } = useStore((state) => state)
+  const { tanks, points: storePoints, getPoints } = useStore((state) => state)
   const router = useRouter()
 
   useEffect(() => {
+    getPoints()
     setWinsTank(tanks.filter((t) => t.name) as IItem[])
-    setPoints(storePoints)
   }, [])
 
   return (
@@ -33,7 +32,7 @@ function NavBar() {
       {winsTank.length > 0 && (
         <div className='flex gap-4'>
           <h1 className='text-white'>{'Guessed right ' + winsTank.length}</h1>
-          <h1 className='text-white'>{`Points ${points}`}</h1>
+          <h1 className='text-white'>{`Points ${storePoints}`}</h1>
         </div>
       )}
     </div>

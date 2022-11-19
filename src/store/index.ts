@@ -13,6 +13,7 @@ interface IData {
   points: number
   addTank: (tank: ITanks) => void
   updateTank: (tank: ITanks) => void
+  getPoints: () => void
 }
 
 export const useStore = create<IData>()(
@@ -31,17 +32,18 @@ export const useStore = create<IData>()(
             t.id.slice(0, t.id.length - 1) ===
             tank.id.slice(0, tank.id.length - 1)
         )
-        const getPoints = state.tanks.reduce((prev: any, next) => {
-          if (next.name) {
-            return prev + next.guesses
-          }
-          return prev
-        }, 0)
-
         //updating values
         const toUpdate = [...state.tanks]
         toUpdate[index] = tank
         set(() => ({ tanks: toUpdate }))
+      },
+      getPoints: () => {
+        const state = get()
+        const getPoints = state.tanks
+          .filter((t) => t.name)
+          .reduce((prev: any, next) => {
+            return prev + next.guesses
+          }, 0)
         set(() => ({ points: getPoints }))
       },
     }),

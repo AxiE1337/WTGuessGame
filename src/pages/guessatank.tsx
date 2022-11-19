@@ -36,9 +36,7 @@ export default function Guessatank() {
   }, [])
 
   if (loading) {
-    return (
-      <h1 className='h-screen fles items-center justify-center'>Loading...</h1>
-    )
+    return <progress className='progress w-56'></progress>
   }
   if (current.id) {
     return <GuessScreen item={current} />
