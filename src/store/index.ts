@@ -14,6 +14,7 @@ interface IData {
   addTank: (tank: ITanks) => void
   updateTank: (tank: ITanks) => void
   getPoints: () => void
+  resetData: () => void
 }
 
 export const useStore = create<IData>()(
@@ -45,6 +46,9 @@ export const useStore = create<IData>()(
             return prev + next.guesses
           }, 0)
         set(() => ({ points: getPointsTanks }))
+      },
+      resetData: () => {
+        set(() => ({ tanks: [], maps: [], points: 0 }))
       },
     }),
     {
