@@ -11,6 +11,7 @@ interface IItem {
 
 function NavBar() {
   const [winsTank, setWinsTank] = useState<IItem[]>([])
+  const [hover, setHover] = useState<boolean>(false)
   const { tanks, points: storePoints, getPoints } = useStore((state) => state)
   const router = useRouter()
 
@@ -22,9 +23,15 @@ function NavBar() {
   return (
     <div className='navbar bg-sky-900'>
       <div className='flex-1 text-white'>
-        <div className='dropdown dropdown-hover'>
-          <label tabIndex={0} className='btn btn-ghost m-1'>
-            Go to
+        <div
+          className='dropdown dropdown-hover'
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+        >
+          <label className='ml-2 swap swap-rotate text-xl text-center'>
+            <input type='checkbox' disabled />
+            <div className={`swap-${hover ? 'off' : 'on'}`}>Go to</div>
+            <div className={`swap-${hover ? 'on' : 'off'}`}>↓</div>
           </label>
           <ul
             tabIndex={0}

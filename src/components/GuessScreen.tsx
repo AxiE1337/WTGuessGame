@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { motion, AnimatePresence } from 'framer-motion'
 import Input from './ui/Input'
 import tanksAutocomplete from '../data/tanks.json'
+import Helper from './ui/Helper'
 
 const variants = {
   enter: (direction: number) => {
@@ -109,13 +110,18 @@ function GuessScreen({ item }: IItem) {
           />
         ))}
       </div>
-      <div>
-        <Input
-          value={inputValue}
-          onChange={setInputValue}
-          autocomplete={tanksAutocomplete.map((item) => item.name)}
-        />
-        <h1 className='text-center mb-2'>
+      <div className='flex flex-col m-1 p-1 gap-2'>
+        <div className='flex items-center justify-center gap-1'>
+          <Helper hover>
+            <p>Type your guess in input!</p>
+          </Helper>
+          <Input
+            value={inputValue}
+            onChange={setInputValue}
+            autocomplete={tanksAutocomplete.map((item) => item.name)}
+          />
+        </div>
+        <h1 className='text-center mb-2 text-white'>
           Guesses remaining: {guessesRemaining}
         </h1>
         <div className='flex items-center justify-evenly'>
