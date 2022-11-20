@@ -8,8 +8,6 @@ export default function Home() {
     <div className='flex flex-col h-screen items-center justify-center'>
       <Head>
         <title>Guess War thunder</title>
-        <meta name='description' content='Guess a tank/map War thunder' />
-        <link rel='icon' href='/favicon.ico' />
       </Head>
       <button className='btn' onClick={() => router.push('/guessthetank')}>
         tanks

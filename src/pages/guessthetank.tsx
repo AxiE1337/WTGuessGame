@@ -43,7 +43,7 @@ export default function Guessatank() {
   }
 
   return (
-    <div className='flex flex-col h-screen items-center justify-center'>
+    <div className='flex flex-col h-screen items-center justify-center bg-gray-800'>
       {tanksDataJson.map((tank, index) => (
         <ItemBar
           item={tank}

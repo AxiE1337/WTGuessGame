@@ -69,7 +69,7 @@ function GuessScreen({ item }: IItem) {
   }
 
   return (
-    <div className='flex flex-col h-screen w-full items-center justify-center'>
+    <div className='flex flex-col h-screen w-full items-center justify-center bg-gray-800'>
       <AnimatePresence initial={false} custom={direction}>
         <div className='relative flex items-center justify-center h-2/4 w-4/5 overflow-hidden'>
           <motion.div
@@ -83,7 +83,7 @@ function GuessScreen({ item }: IItem) {
               x: { type: 'spring', stiffness: 250, damping: 20 },
               opacity: { duration: 0.2 },
             }}
-            className='absolute bg-slate-500 rounded-xl m-4 h-auto w-auto'
+            className='absolute rounded-xl m-4 h-auto w-auto'
           >
             <Image
               className='rounded-xl'
@@ -103,7 +103,7 @@ function GuessScreen({ item }: IItem) {
             key={index}
             type='radio'
             name='radio-1'
-            className='radio radio-success ml-2'
+            className='radio radio-info ml-2'
             onClick={() => setImgIndex((prev) => [index, index - prev[0]])}
             disabled={item.imgs.length - guessesRemaining < index}
           />
