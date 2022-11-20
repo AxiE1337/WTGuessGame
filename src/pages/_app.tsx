@@ -6,10 +6,10 @@ import { useStore } from '../store/index'
 import { useMemo } from 'react'
 
 export default function App({ Component, pageProps }: AppProps) {
-  const { resetData, tanks, points } = useStore((state) => state)
+  const { resetData, tanks, points, maps } = useStore((state) => state)
 
   useMemo(() => {
-    if (isDataComromised(tanks, points)) {
+    if (isDataComromised(tanks, points, maps)) {
       resetData()
     }
   }, [])

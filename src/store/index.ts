@@ -6,10 +6,15 @@ interface ITanks {
   guesses: number
   name?: string
 }
+interface IMaps {
+  id: string
+  guesses: number
+  name?: string
+}
 
 interface IData {
   tanks: ITanks[]
-  maps: string[]
+  maps: IMaps[]
   points: number
   addTank: (tank: ITanks) => void
   updateTank: (tank: ITanks) => void
