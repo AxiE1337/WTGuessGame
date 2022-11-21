@@ -1,11 +1,12 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useMemo, useState } from 'react'
 import Image from 'next/image'
+import Input from './ui/Input'
+import Helper from './ui/Helper'
 import { useStore } from '../store/index'
 import { useRouter } from 'next/router'
 import { motion, AnimatePresence } from 'framer-motion'
-import Input from './ui/Input'
-import tanksAutocomplete from '../data/tanks.json'
-import Helper from './ui/Helper'
+import { autoCompleteData } from '../data/autocomplete'
+import { guessesRemaining } from '../helpers/guessesRemaining'
 
 const variants = {
   enter: (direction: number) => {
@@ -28,28 +29,36 @@ const variants = {
   },
 }
 
+type Type = 'tank' | 'map'
+
 interface IItem {
   item: { id: string; name: string; imgs: string[] }
+  type: Type
 }
 
-function GuessScreen({ item }: IItem) {
+function GuessScreen({ item, type }: IItem) {
   const [[imgIndex, direction], setImgIndex] = useState<number[]>([0, 0])
   const [inputValue, setInputValue] = useState<string>('')
-  const { updateTank, tanks } = useStore((state) => state)
-  const guessesRemaining = tanks.find((t) => t.id === item.id)
-    ?.guesses as number
+  const { updateItem, tanks, maps } = useStore((state) => state)
+  const guesses = useMemo(
+    () => guessesRemaining(tanks, maps, type, item.id),
+    [imgIndex]
+  )
   const router = useRouter()
 
   const skipHandler = () => {
     if (imgIndex < item.imgs.length - 1) {
       setImgIndex([imgIndex + 1, 1])
-      updateTank({ id: item.id, guesses: guessesRemaining - 1 })
+      updateItem({ id: item.id, guesses: guesses - 1 }, type)
     }
-    if (guessesRemaining - 1 < 1) {
-      updateTank({
-        id: item.id,
-        guesses: guessesRemaining - 1,
-      })
+    if (guesses - 1 < 1) {
+      updateItem(
+        {
+          id: item.id,
+          guesses: guesses - 1,
+        },
+        type
+      )
       router.reload()
     }
   }
@@ -60,11 +69,14 @@ function GuessScreen({ item }: IItem) {
       skipHandler()
       setInputValue('')
     } else {
-      updateTank({
-        id: item.id,
-        guesses: guessesRemaining,
-        name: inputValue,
-      })
+      updateItem(
+        {
+          id: item.id,
+          guesses: guesses,
+          name: inputValue,
+        },
+        type
+      )
       router.reload()
     }
   }
@@ -106,7 +118,7 @@ function GuessScreen({ item }: IItem) {
             name='radio-1'
             className='radio radio-info ml-2'
             onClick={() => setImgIndex((prev) => [index, index - prev[0]])}
-            disabled={item.imgs.length - guessesRemaining < index}
+            disabled={item.imgs.length - guesses < index}
           />
         ))}
       </div>
@@ -118,11 +130,11 @@ function GuessScreen({ item }: IItem) {
           <Input
             value={inputValue}
             onChange={setInputValue}
-            autocomplete={tanksAutocomplete.map((item) => item.name)}
+            autocomplete={autoCompleteData}
           />
         </div>
         <h1 className='text-center mb-2 text-white'>
-          Guesses remaining: {guessesRemaining}
+          Guesses remaining: {guesses}
         </h1>
         <div className='flex items-center justify-evenly'>
           <button className='btn' onClick={submitHandler}>

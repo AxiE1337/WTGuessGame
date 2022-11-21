@@ -1,23 +1,20 @@
 import create from 'zustand'
 import { persist } from 'zustand/middleware'
 
-interface ITanks {
-  id: string
-  guesses: number
-  name?: string
-}
-interface IMaps {
+type Type = 'tank' | 'map'
+
+interface IItem {
   id: string
   guesses: number
   name?: string
 }
 
 interface IData {
-  tanks: ITanks[]
-  maps: IMaps[]
+  tanks: IItem[]
+  maps: IItem[]
   points: number
-  addTank: (tank: ITanks) => void
-  updateTank: (tank: ITanks) => void
+  addItem: (item: IItem, type: Type) => void
+  updateItem: (item: IItem, type: Type) => void
   getPoints: () => void
   resetData: () => void
 }
@@ -28,20 +25,30 @@ export const useStore = create<IData>()(
       tanks: [],
       maps: [],
       points: 0,
-      addTank: (tank) => {
-        set(({ tanks }) => ({ tanks: [...tanks, tank] }))
+      addItem: (item, type) => {
+        if (type === 'tank') {
+          set(({ tanks }) => ({ tanks: [...tanks, item] }))
+        }
+        if (type === 'map') {
+          set(({ maps }) => ({ maps: [...maps, item] }))
+        }
       },
-      updateTank: (tank) => {
-        const state = get()
-        const index = state.tanks.findIndex(
-          (t) =>
-            t.id.slice(0, t.id.length - 1) ===
-            tank.id.slice(0, tank.id.length - 1)
-        )
+      updateItem: (item, type) => {
+        const { tanks, maps } = get()
+
         //updating values
-        const toUpdate = [...state.tanks]
-        toUpdate[index] = tank
-        set(() => ({ tanks: toUpdate }))
+        if (type === 'tank') {
+          const index = tanks.findIndex((t) => t.id === item.id)
+          const toUpdate = [...tanks]
+          toUpdate[index] = item
+          set(() => ({ tanks: toUpdate }))
+        }
+        if (type === 'map') {
+          const index = maps.findIndex((m) => m.id === item.id)
+          const toUpdate = [...maps]
+          toUpdate[index] = item
+          set(() => ({ maps: toUpdate }))
+        }
       },
       getPoints: () => {
         const { tanks, maps } = get()
@@ -50,7 +57,12 @@ export const useStore = create<IData>()(
           .reduce((prev: any, next) => {
             return prev + next.guesses
           }, 0)
-        set(() => ({ points: getPointsTanks }))
+        const getPointsMaps = maps
+          .filter((m) => m.name)
+          .reduce((prev: any, next) => {
+            return prev + next.guesses
+          }, 0)
+        set(() => ({ points: getPointsTanks + getPointsMaps }))
       },
       resetData: () => {
         set(() => ({ tanks: [], maps: [], points: 0 }))

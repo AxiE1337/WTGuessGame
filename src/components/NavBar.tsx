@@ -2,22 +2,22 @@ import React, { memo, useEffect, useState } from 'react'
 import { useStore } from '../store/index'
 import { useRouter } from 'next/router'
 
-interface IItem {
-  id: string
-  name: string
-  guesses: number
-  imgs: string[]
-}
-
 function NavBar() {
-  const [winsTank, setWinsTank] = useState<IItem[]>([])
   const [hover, setHover] = useState<boolean>(false)
-  const { tanks, points: storePoints, getPoints } = useStore((state) => state)
+  const [guessedRight, setGuessedRight] = useState<number>(0)
+  const {
+    tanks,
+    maps,
+    points: storePoints,
+    getPoints,
+  } = useStore((state) => state)
   const router = useRouter()
 
   useEffect(() => {
     getPoints()
-    setWinsTank(tanks.filter((t) => t.name) as IItem[])
+    setGuessedRight(
+      tanks.filter((t) => t.name).length + maps.filter((m) => m.name).length
+    )
   }, [])
 
   return (
@@ -40,15 +40,15 @@ function NavBar() {
             <li onClick={() => router.push('/guessthetank')}>
               <a>Guess the tank</a>
             </li>
-            <li>
+            <li onClick={() => router.push('/guessthemap')}>
               <a>Guess the map</a>
             </li>
           </ul>
         </div>
       </div>
-      {winsTank.length > 0 && (
+      {guessedRight > 0 && (
         <div className='flex gap-4'>
-          <h1 className='text-white'>{'Guessed right ' + winsTank.length}</h1>
+          <h1 className='text-white'>{'Guessed right ' + guessedRight}</h1>
           <h1 className='text-white'>{`Points ${storePoints}`}</h1>
         </div>
       )}

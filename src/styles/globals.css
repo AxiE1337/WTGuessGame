@@ -7,3 +7,15 @@
   padding: 0;
   font-family: 'Inter', sans-serif;
 }
+body::-webkit-scrollbar {
+  width: 6px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #0c4a6e;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #162e38, #2c5364, #203a43);
+  border-radius: 20px;
+}

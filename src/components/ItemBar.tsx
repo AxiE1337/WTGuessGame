@@ -52,7 +52,7 @@ function ItemBar({ item, dataStore, play, index }: IItem) {
       <div className='flex w-4/6 h-16 rounded items-center justify-between mt-2 p-2 text-white bg-sky-900 hover:scale-110 ease-out duration-300 hover:bg-sky-800'>
         <p>#{index + 1}</p>
         <div className='flex items-center justify-between gap-4 pr-2'>
-          <h1 className={`${color()} font-bold`}>{gameState()}</h1>
+          <h1 className={`${color()} font-bold select-none`}>{gameState()}</h1>
           <h1 className='select-none'>
             {String(updatedItem?.guesses) === 'undefined' && 'unplayed'}
           </h1>
@@ -66,9 +66,7 @@ function ItemBar({ item, dataStore, play, index }: IItem) {
           </p>
           {updatedItem?.name && (
             <h1>
-              {updatedItem.name
-                ? `Right answer: ${updatedItem.name.toLocaleUpperCase()}`
-                : 'loss'}
+              {updatedItem.name ? updatedItem.name.toLocaleUpperCase() : 'loss'}
             </h1>
           )}
           {gameState() === '' && (

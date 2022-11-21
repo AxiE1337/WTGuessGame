@@ -19,13 +19,13 @@ export default function Guessatank() {
   const [loading, setLoading] = useState<boolean>(true)
   const [dataStore, setData] = useState<ITanks[]>([])
   const [current, setCurrent] = useState<ITank>({ id: '', name: '', imgs: [] })
-  const { tanks: tanksDataStore, addTank } = useStore((state) => state)
+  const { tanks: tanksDataStore, addItem } = useStore((state) => state)
 
   const playHandler = (id: string) => {
     const tank = tanksDataJson.find((t) => t.id === id) as ITank
     const isHas = tanksDataStore.find((t) => t.id === id)
     if (!isHas) {
-      addTank({ id: tank.id, guesses: tank.imgs.length })
+      addItem({ id: tank.id, guesses: tank.imgs.length }, 'tank')
     }
     setCurrent(tank)
   }
@@ -39,7 +39,7 @@ export default function Guessatank() {
     return <progress className='progress w-56'></progress>
   }
   if (current.id) {
-    return <GuessScreen item={current} />
+    return <GuessScreen item={current} type='tank' />
   }
 
   return (

@@ -1,0 +1,29 @@
+[
+  {
+    "id": "zvGwrC6KGU",
+    "name": "abandoned town",
+    "imgs": [
+      "/maps/abandonedtown_1.png",
+      "/maps/abandonedtown_2.png",
+      "/maps/abandonedtown_3.png"
+    ]
+  },
+  {
+    "id": "7ZmA434bvC",
+    "name": "eastern europe",
+    "imgs": [
+      "/maps/easterneurope_1.png",
+      "/maps/easterneurope_2.png",
+      "/maps/easterneurope_3.png"
+    ]
+  },
+  {
+    "id": "ZGPD8Pi8tt",
+    "name": "advance to the rhine",
+    "imgs": [
+      "/maps/advancetotherhine_1.png",
+      "/maps/advancetotherhine_2.png",
+      "/maps/advancetotherhine_3.png"
+    ]
+  }
+]
