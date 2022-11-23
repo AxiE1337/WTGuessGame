@@ -1,10 +1,27 @@
 import React, { memo, useEffect, useState } from 'react'
 import { useStore } from '../store/index'
 import { useRouter } from 'next/router'
+import Modal from './ui/Modal'
+
+interface IStats {
+  guessedRight: number
+  guessedTanks: number
+  guessedMaps: number
+  points: number
+  played: number
+  losses: number
+}
 
 function NavBar() {
   const [hover, setHover] = useState<boolean>(false)
-  const [guessedRight, setGuessedRight] = useState<number>(0)
+  const [stats, setStats] = useState<IStats>({
+    guessedRight: 0,
+    guessedTanks: 0,
+    guessedMaps: 0,
+    points: 0,
+    played: 0,
+    losses: 0,
+  })
   const {
     tanks,
     maps,
@@ -15,9 +32,17 @@ function NavBar() {
 
   useEffect(() => {
     getPoints()
-    setGuessedRight(
-      tanks.filter((t) => t.name).length + maps.filter((m) => m.name).length
-    )
+    setStats({
+      guessedRight:
+        tanks.filter((t) => t.name).length + maps.filter((m) => m.name).length,
+      guessedTanks: tanks.filter((t) => t.name).length,
+      guessedMaps: maps.filter((m) => m.name).length,
+      points: storePoints,
+      played: tanks.length + maps.length,
+      losses:
+        tanks.filter((t) => t.guesses === 0).length +
+        maps.filter((m) => m.guesses === 0).length,
+    })
   }, [])
 
   return (
@@ -46,12 +71,19 @@ function NavBar() {
           </ul>
         </div>
       </div>
-      {guessedRight > 0 && (
-        <div className='flex gap-4'>
-          <h1 className='text-white'>{'Guessed right ' + guessedRight}</h1>
-          <h1 className='text-white'>{`Points ${storePoints}`}</h1>
+      <label htmlFor='my-modal-4' className='btn btn-xs mx-4'>
+        stats
+      </label>
+      <Modal>
+        <div className='flex flex-col gap-4'>
+          <h1>{`Points ${stats.points}`}</h1>
+          <h1>{'Guessed right ' + stats.guessedRight}</h1>
+          <h1>{`Tanks guessed right ${stats.guessedTanks}`}</h1>
+          <h1>{`Maps guessed right ${stats.guessedMaps}`}</h1>
+          <h1>{`Played ${stats.played}`}</h1>
+          <h1>{`Losses ${stats.losses}`}</h1>
         </div>
-      )}
+      </Modal>
     </div>
   )
 }
