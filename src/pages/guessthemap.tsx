@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import GuessScreen from '../components/GuessScreen'
 import ItemBar from '../components/ItemBar'
 import mapsDataJson from '../data/maps.json'
+import { getRandNum } from '../helpers/getRandNum'
 import { useStore } from '../store/index'
 
-interface IMaps {
+interface IMapStore {
   id: string
   guesses?: number
   name?: string
@@ -17,7 +18,7 @@ interface IMap {
 
 export default function guessthemap() {
   const [loading, setLoading] = useState<boolean>(true)
-  const [dataStore, setData] = useState<IMaps[]>([])
+  const [dataStore, setData] = useState<IMapStore[]>([])
   const [current, setCurrent] = useState<IMap>({ id: '', name: '', imgs: [] })
   const { maps: mapsDataStore, addItem } = useStore((state) => state)
 
@@ -29,6 +30,22 @@ export default function guessthemap() {
     }
     setCurrent(map)
   }
+
+  const playRandomHandler = useCallback(() => {
+    const filteredArr: IMap[] = []
+    for (let i of mapsDataJson) {
+      const find = mapsDataStore.find((t) => t.id === i.id)
+      if (!find) {
+        filteredArr.push(i)
+      }
+    }
+    const minValue = 0
+    const maxValue = filteredArr.length - 1
+    const randItem = filteredArr[getRandNum(minValue, maxValue)]
+    if (randItem) {
+      playHandler(randItem.id)
+    }
+  }, [])
 
   useEffect(() => {
     setData(mapsDataStore)
@@ -44,6 +61,9 @@ export default function guessthemap() {
 
   return (
     <div className='flex flex-col h-screen items-center justify-center bg-gray-800'>
+      <button className='btn' onClick={playRandomHandler}>
+        Random
+      </button>
       {mapsDataJson.map((map, index) => (
         <ItemBar
           item={map}

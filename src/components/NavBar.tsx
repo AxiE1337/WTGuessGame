@@ -11,17 +11,18 @@ interface IStats {
   played: number
   losses: number
 }
+const statsInitialState: IStats = {
+  guessedRight: 0,
+  guessedTanks: 0,
+  guessedMaps: 0,
+  points: 0,
+  played: 0,
+  losses: 0,
+}
 
 function NavBar() {
   const [hover, setHover] = useState<boolean>(false)
-  const [stats, setStats] = useState<IStats>({
-    guessedRight: 0,
-    guessedTanks: 0,
-    guessedMaps: 0,
-    points: 0,
-    played: 0,
-    losses: 0,
-  })
+  const [stats, setStats] = useState<IStats>(statsInitialState)
   const {
     tanks,
     maps,
@@ -55,7 +56,7 @@ function NavBar() {
         >
           <label className='ml-2 swap swap-rotate text-xl text-center'>
             <input type='checkbox' disabled />
-            <div className={`swap-${hover ? 'off' : 'on'}`}>Go to</div>
+            <div className={`swap-${hover ? 'off' : 'on'}`}>Menu</div>
             <div className={`swap-${hover ? 'on' : 'off'}`}>↓</div>
           </label>
           <ul

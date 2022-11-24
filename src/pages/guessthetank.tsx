@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useStore } from '../store/index'
 import tanksDataJson from '../data/tanks.json'
 import ItemBar from '../components/ItemBar'
 import GuessScreen from '../components/GuessScreen'
+import { getRandNum } from '../helpers/getRandNum'
 
-interface ITanks {
+interface ITankStore {
   id: string
   guesses?: number
   name?: string
@@ -17,7 +18,7 @@ interface ITank {
 
 export default function Guessatank() {
   const [loading, setLoading] = useState<boolean>(true)
-  const [dataStore, setData] = useState<ITanks[]>([])
+  const [dataStore, setDataStore] = useState<ITankStore[]>([])
   const [current, setCurrent] = useState<ITank>({ id: '', name: '', imgs: [] })
   const { tanks: tanksDataStore, addItem } = useStore((state) => state)
 
@@ -30,8 +31,24 @@ export default function Guessatank() {
     setCurrent(tank)
   }
 
+  const playRandomHandler = useCallback(() => {
+    const filteredArr: any[] = []
+    for (let i of tanksDataJson) {
+      const find = tanksDataStore.find((t) => t.id === i.id)
+      if (!find) {
+        filteredArr.push(i)
+      }
+    }
+    const minValue = 0
+    const maxValue = filteredArr.length - 1
+    const randItem = filteredArr[getRandNum(minValue, maxValue)]
+    if (randItem) {
+      playHandler(randItem.id)
+    }
+  }, [])
+
   useEffect(() => {
-    setData(tanksDataStore)
+    setDataStore(tanksDataStore)
     setLoading(false)
   }, [])
 
@@ -44,6 +61,9 @@ export default function Guessatank() {
 
   return (
     <div className='flex flex-col h-screen items-center justify-center bg-gray-800'>
+      <button className='btn' onClick={playRandomHandler}>
+        Random
+      </button>
       {tanksDataJson.map((tank, index) => (
         <ItemBar
           item={tank}
