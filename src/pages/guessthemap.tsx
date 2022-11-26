@@ -60,8 +60,8 @@ export default function guessthemap() {
   }
 
   return (
-    <div className='flex flex-col h-screen items-center justify-center bg-gray-800'>
-      <button className='btn' onClick={playRandomHandler}>
+    <div className='flex flex-col min-h-screen items-center justify-center bg-gray-800 pb-2'>
+      <button className='btn mt-2 md:btn-xs' onClick={playRandomHandler}>
         Random
       </button>
       {mapsDataJson.map((map, index) => (

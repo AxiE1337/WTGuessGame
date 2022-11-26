@@ -7,7 +7,11 @@ interface IHelper {
 
 function Helper({ children, hover }: IHelper) {
   return (
-    <div className={`dropdown ${hover && 'dropdown-hover'} dropdown-end`}>
+    <div
+      className={`dropdown ${
+        hover && 'dropdown-hover'
+      } dropdown-end md:dropdown-right`}
+    >
       <label tabIndex={0} className='btn btn-circle btn-ghost btn-xs text-info'>
         <svg
           xmlns='http://www.w3.org/2000/svg'
