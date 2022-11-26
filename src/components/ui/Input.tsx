@@ -1,51 +1,45 @@
-import React, { memo, useState } from 'react'
+import React, { memo } from 'react'
 
 interface IInput {
   value: string
   autocomplete?: string[]
   onChange: (value: string) => void
+  onSubmit: () => void
 }
 
-function Input({ value, autocomplete, onChange }: IInput) {
-  const [isShown, setIsShown] = useState<boolean>(false)
-
-  const autocompleteHandler = (item: string) => {
-    onChange(item)
-    setIsShown(false)
-  }
+function Input({ value, autocomplete, onChange, onSubmit }: IInput) {
   const onChangeHandler = (value: string) => {
     onChange(value)
-    if (value.length > 2) {
-      setIsShown(true)
-    } else {
-      setIsShown(false)
+  }
+  const onSubmitHandler = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (value.length > 1) {
+      onSubmit()
     }
   }
 
   return (
-    <div className='w-full relative'>
+    <form className='w-full relative' onSubmit={onSubmitHandler}>
       <input
-        type='text'
+        type='search'
+        id='dM34b'
         className='input w-full max-w-xs border-none bg-sky-900 text-white focus:border-none'
-        onChange={(e) => onChangeHandler(e.target.value)}
+        onChange={(e) => onChangeHandler(e.target.value.toLowerCase())}
         value={value}
+        list='items'
       />
-      {isShown && (
-        <div className='absolute w-full z-100 bg-sky-900'>
+      {value.length > 1 && (
+        <datalist id='items'>
           {autocomplete
             ?.filter((item) => item.includes(value))
             .map((item, index) => (
-              <h1
-                className='flex items-center pl-1 text-white cursor-pointer h-10 hover:bg-gray-800'
-                key={index}
-                onClick={() => autocompleteHandler(item)}
-              >
+              <option key={index} value={item}>
                 {item}
-              </h1>
+              </option>
             ))}
-        </div>
+        </datalist>
       )}
-    </div>
+    </form>
   )
 }
 

@@ -131,6 +131,7 @@ function GuessScreen({ item, type }: IItem) {
             value={inputValue}
             onChange={setInputValue}
             autocomplete={autoCompleteData}
+            onSubmit={submitHandler}
           />
         </div>
         <h1 className='text-center mb-2 text-white'>
