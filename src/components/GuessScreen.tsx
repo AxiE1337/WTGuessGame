@@ -39,7 +39,7 @@ interface IItem {
 function GuessScreen({ item, type }: IItem) {
   const [[imgIndex, direction], setImgIndex] = useState<number[]>([0, 0])
   const [inputValue, setInputValue] = useState<string>('')
-  const { updateItem, tanks, maps } = useStore((state) => state)
+  const { updateItem, tanks, maps, getPoints } = useStore((state) => state)
   const guesses = useMemo(
     () => guessesRemaining(tanks, maps, type, item.id),
     [imgIndex]
@@ -77,6 +77,7 @@ function GuessScreen({ item, type }: IItem) {
         },
         type
       )
+      getPoints()
       router.reload()
     }
   }

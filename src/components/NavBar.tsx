@@ -23,16 +23,10 @@ const statsInitialState: IStats = {
 function NavBar() {
   const [hover, setHover] = useState<boolean>(false)
   const [stats, setStats] = useState<IStats>(statsInitialState)
-  const {
-    tanks,
-    maps,
-    points: storePoints,
-    getPoints,
-  } = useStore((state) => state)
+  const { tanks, maps, points: storePoints } = useStore((state) => state)
   const router = useRouter()
 
   useEffect(() => {
-    getPoints()
     setStats({
       guessedRight:
         tanks.filter((t) => t.name).length + maps.filter((m) => m.name).length,
