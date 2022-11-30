@@ -23,7 +23,7 @@ function Input({ value, autocomplete, onChange, onSubmit }: IInput) {
       <input
         type='search'
         id='dM34b'
-        className='input w-full max-w-xs border-none bg-sky-900 text-white focus:border-none md:w-11/12'
+        className='input w-full max-w-xs border-none bg-gray-200 dark:bg-sky-900 dark:text-white focus:border-none md:w-11/12'
         onChange={(e) => onChangeHandler(e.target.value.toLowerCase())}
         value={value}
         list='items'

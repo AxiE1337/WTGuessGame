@@ -1,7 +1,9 @@
 import React, { memo, useEffect, useState } from 'react'
 import { useStore } from '../store/index'
+import { useTheme } from '../store/themeMode'
 import { useRouter } from 'next/router'
 import Modal from './ui/Modal'
+import SwapBtn from './ui/SwapBtn'
 
 interface IStats {
   guessedRight: number
@@ -24,7 +26,12 @@ function NavBar() {
   const [hover, setHover] = useState<boolean>(false)
   const [stats, setStats] = useState<IStats>(statsInitialState)
   const { tanks, maps, points: storePoints } = useStore((state) => state)
+  const { mode: themeMode, changeMode } = useTheme((state) => state)
   const router = useRouter()
+
+  const changeThemeMode = (value: string) => {
+    changeMode(value === 'light' ? 'dark' : 'light')
+  }
 
   useEffect(() => {
     setStats({
@@ -41,21 +48,21 @@ function NavBar() {
   }, [])
 
   return (
-    <div className='navbar bg-sky-900'>
+    <div className='navbar dark:bg-sky-900 border-b-2 border-gray-800'>
       <div className='flex-1 text-white'>
         <div
           className='dropdown dropdown-hover'
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
         >
-          <label className='ml-2 swap swap-rotate text-xl text-center'>
+          <label className='ml-2 swap swap-rotate text-xl text-center text-black dark:text-white'>
             <input type='checkbox' disabled />
             <div className={`swap-${hover ? 'off' : 'on'}`}>Menu</div>
             <div className={`swap-${hover ? 'on' : 'off'}`}>↓</div>
           </label>
           <ul
             tabIndex={0}
-            className='dropdown-content menu p-1 shadow bg-sky-900 w-52'
+            className='dropdown-content menu p-1 shadow bg-gray-700 dark:bg-sky-900 w-52'
           >
             <li onClick={() => router.push('/guessthetank')}>
               <a>Guess the tank</a>
@@ -69,6 +76,13 @@ function NavBar() {
       <label htmlFor='my-modal-4' className='btn btn-xs mx-4'>
         stats
       </label>
+      <SwapBtn
+        onChange={(e) => {
+          changeThemeMode(e.target.value)
+        }}
+        value={themeMode}
+        checked={themeMode === 'dark' ? false : true}
+      />
       <Modal>
         <div className='flex flex-col gap-4'>
           <h1>{`Points ${stats.points}`}</h1>

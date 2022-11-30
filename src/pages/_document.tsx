@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {
   return (
-    <Html>
+    <Html data-theme='dark' className='dark'>
       <Head>
         <meta name='description' content='Guess the tank/map War thunder' />
         <link rel='icon' href='/favicon.ico' />

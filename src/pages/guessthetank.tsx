@@ -60,7 +60,7 @@ export default function Guessatank() {
   }
 
   return (
-    <div className='flex flex-col min-h-screen items-center justify-center bg-gray-800 pb-2'>
+    <div className='flex flex-col min-h-screen items-center justify-center dark:bg-gray-800 pb-2'>
       <button className='btn mt-2 md:btn-xs' onClick={playRandomHandler}>
         Random
       </button>

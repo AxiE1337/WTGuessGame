@@ -5,7 +5,7 @@ export default function Home() {
   const router = useRouter()
 
   return (
-    <div className='flex flex-col h-screen items-center justify-center'>
+    <div className='flex flex-col h-screen items-center justify-center dark:bg-gray-800'>
       <Head>
         <title>Guess War thunder</title>
       </Head>

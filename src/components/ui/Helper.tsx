@@ -29,7 +29,7 @@ function Helper({ children, hover }: IHelper) {
       </label>
       <div
         tabIndex={0}
-        className='card compact dropdown-content bg-sky-900 text-white shadow rounded-box w-64'
+        className='card compact dropdown-content bg-gray-700 dark:bg-sky-900 text-white shadow rounded-box w-64'
       >
         <div className='card-body'>{children}</div>
       </div>

@@ -83,7 +83,7 @@ function GuessScreen({ item, type }: IItem) {
   }
 
   return (
-    <div className='flex flex-col h-screen w-full items-center justify-center bg-gray-800'>
+    <div className='flex flex-col h-screen w-full items-center justify-center dark:bg-gray-800'>
       <AnimatePresence initial={false} custom={direction}>
         <div className='relative flex items-center justify-center h-2/4 w-4/5 overflow-hidden md:w-full'>
           <motion.div
@@ -135,7 +135,7 @@ function GuessScreen({ item, type }: IItem) {
             onSubmit={submitHandler}
           />
         </div>
-        <h1 className='text-center mb-2 text-white'>
+        <h1 className='text-center mb-2 dark:text-white'>
           Guesses remaining: {guesses}
         </h1>
         <div className='flex items-center justify-evenly'>

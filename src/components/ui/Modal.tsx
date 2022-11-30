@@ -29,7 +29,7 @@ function Modal({ children }: IModal) {
       <input type='checkbox' id='my-modal-4' className='modal-toggle' />
       <label htmlFor='my-modal-4' className='modal cursor-pointer'>
         <label
-          className='modal-box rounded-md relative p-0 h-4/6 bg-sky-900 text-white'
+          className='modal-box rounded-md relative p-0 h-4/6 dark:bg-sky-900 dark:text-white'
           htmlFor=''
         >
           <div className='absolute w-full flex justify-end'>{closeBtn}</div>

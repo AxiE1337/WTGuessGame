@@ -3,10 +3,25 @@ import type { AppProps } from 'next/app'
 import Layout from '../components/Layout'
 import { isDataComromised } from '../helpers/isDataCompromised'
 import { useStore } from '../store/index'
-import { useMemo } from 'react'
+import { useTheme } from '../store/themeMode'
+import { useLayoutEffect, useMemo } from 'react'
 
 export default function App({ Component, pageProps }: AppProps) {
   const { resetData, tanks, points, maps } = useStore((state) => state)
+  const theme = useTheme((state) => state.mode)
+
+  useLayoutEffect(() => {
+    const html = document.querySelector('html') as HTMLElement
+    html.setAttribute('data-theme', theme)
+
+    if (theme === 'dark') {
+      html.classList.remove('light')
+      html.classList.add('dark')
+    } else {
+      html.classList.remove('dark')
+      html.classList.add('light')
+    }
+  }, [theme])
 
   useMemo(() => {
     if (isDataComromised(tanks, points, maps)) {
