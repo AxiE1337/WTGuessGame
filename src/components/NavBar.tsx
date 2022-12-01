@@ -45,7 +45,7 @@ function NavBar() {
         tanks.filter((t) => t.guesses === 0).length +
         maps.filter((m) => m.guesses === 0).length,
     })
-  }, [])
+  }, [tanks, maps])
 
   return (
     <div className='navbar dark:bg-sky-900 border-b-2 border-gray-800'>

@@ -50,13 +50,13 @@ export default function Guessatank() {
   useEffect(() => {
     setDataStore(tanksDataStore)
     setLoading(false)
-  }, [])
+  }, [tanksDataStore])
 
   if (loading) {
     return <progress className='progress w-56'></progress>
   }
   if (current.id) {
-    return <GuessScreen item={current} type='tank' />
+    return <GuessScreen item={current} current={setCurrent} type='tank' />
   }
 
   return (

@@ -50,13 +50,13 @@ export default function guessthemap() {
   useEffect(() => {
     setData(mapsDataStore)
     setLoading(false)
-  }, [])
+  }, [mapsDataStore])
 
   if (loading) {
     return <progress className='progress w-56'></progress>
   }
   if (current.id) {
-    return <GuessScreen item={current} type='map' />
+    return <GuessScreen item={current} current={setCurrent} type='map' />
   }
 
   return (

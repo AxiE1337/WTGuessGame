@@ -3,7 +3,6 @@ import Image from 'next/image'
 import Input from './ui/Input'
 import Helper from './ui/Helper'
 import { useStore } from '../store/index'
-import { useRouter } from 'next/router'
 import { motion, AnimatePresence } from 'framer-motion'
 import { autoCompleteData } from '../data/autocomplete'
 import { guessesRemaining } from '../helpers/guessesRemaining'
@@ -33,10 +32,11 @@ type Type = 'tank' | 'map'
 
 interface IItem {
   item: { id: string; name: string; imgs: string[] }
+  current: (item: { id: string; name: string; imgs: string[] }) => void
   type: Type
 }
 
-function GuessScreen({ item, type }: IItem) {
+function GuessScreen({ item, current, type }: IItem) {
   const [[imgIndex, direction], setImgIndex] = useState<number[]>([0, 0])
   const [inputValue, setInputValue] = useState<string>('')
   const { updateItem, tanks, maps, getPoints } = useStore((state) => state)
@@ -44,7 +44,6 @@ function GuessScreen({ item, type }: IItem) {
     () => guessesRemaining(tanks, maps, type, item.id),
     [imgIndex]
   )
-  const router = useRouter()
 
   const skipHandler = () => {
     if (imgIndex < item.imgs.length - 1) {
@@ -59,7 +58,8 @@ function GuessScreen({ item, type }: IItem) {
         },
         type
       )
-      router.reload()
+      setInputValue('')
+      current({ id: '', name: '', imgs: [] })
     }
   }
 
@@ -78,7 +78,8 @@ function GuessScreen({ item, type }: IItem) {
         type
       )
       getPoints()
-      router.reload()
+      setInputValue('')
+      current({ id: '', name: '', imgs: [] })
     }
   }
 
