@@ -3,11 +3,11 @@ import Image from 'next/image'
 import Input from './ui/Input'
 import Helper from './ui/Helper'
 import { useStore } from '../store/index'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, Variants } from 'framer-motion'
 import { autoCompleteData } from '../data/autocomplete'
 import { guessesRemaining } from '../helpers/guessesRemaining'
 
-const variants = {
+const variants: Variants = {
   enter: (direction: number) => {
     return {
       x: direction > 0 ? 1000 : -1000,
@@ -27,6 +27,26 @@ const variants = {
     }
   },
 }
+const btnVariants: Variants = {
+  animateLoss: {
+    scale: 1.5,
+    rotate: 5,
+    color: 'rgb(255, 0, 0)',
+    transition: {
+      type: 'spring',
+      duration: 0.5,
+    },
+  },
+  animateWin: {
+    scale: 1.5,
+    rotate: 5,
+    color: 'rgb(50,205,50)',
+    transition: {
+      type: 'spring',
+      duration: 0.5,
+    },
+  },
+}
 
 type Type = 'tank' | 'map'
 
@@ -40,6 +60,8 @@ function GuessScreen({ item, current, type }: IItem) {
   const [[imgIndex, direction], setImgIndex] = useState<number[]>([0, 0])
   const [inputValue, setInputValue] = useState<string>('')
   const { updateItem, tanks, maps, getPoints } = useStore((state) => state)
+  const [subAnim, setSubAnim] = useState<string>('')
+  const [isAnimating, setIsAnimating] = useState<boolean>(false)
   const guesses = useMemo(
     () => guessesRemaining(tanks, maps, type, item.id),
     [imgIndex]
@@ -63,24 +85,46 @@ function GuessScreen({ item, current, type }: IItem) {
     }
   }
 
-  const submitHandler = () => {
+  const submitHandler = async () => {
     const isWin = item.name === inputValue
+    if (inputValue.length < 1) return
     if (!isWin) {
-      skipHandler()
       setInputValue('')
+      await submitAnimation('animateLoss')?.then(() => {
+        skipHandler()
+      })
     } else {
-      updateItem(
-        {
-          id: item.id,
-          guesses: guesses,
-          name: inputValue,
-        },
-        type
-      )
-      getPoints()
       setInputValue('')
-      current({ id: '', name: '', imgs: [] })
+      await submitAnimation('animateWin')?.then(() => {
+        updateItem(
+          {
+            id: item.id,
+            guesses: guesses,
+            name: inputValue,
+          },
+          type
+        )
+        getPoints()
+        current({ id: '', name: '', imgs: [] })
+      })
     }
+  }
+
+  const submitAnimation = (value: string) => {
+    if (isAnimating) return
+    if (value === 'animateLoss') {
+      setSubAnim(value)
+    }
+    if (value === 'animateWin') {
+      setSubAnim(value)
+    }
+    return new Promise((resolve, reject) => {
+      setIsAnimating(true)
+      setTimeout(() => {
+        setIsAnimating(false)
+        resolve(setSubAnim(''))
+      }, 600)
+    })
   }
 
   return (
@@ -140,9 +184,14 @@ function GuessScreen({ item, current, type }: IItem) {
           Guesses remaining: {guesses}
         </h1>
         <div className='flex items-center justify-evenly'>
-          <button className='btn md:btn-sm' onClick={submitHandler}>
+          <motion.button
+            className='btn md:btn-sm'
+            animate={subAnim}
+            onClick={submitHandler}
+            variants={btnVariants}
+          >
             Submit
-          </button>
+          </motion.button>
           <button className='btn md:btn-sm' onClick={skipHandler}>
             Skip
           </button>

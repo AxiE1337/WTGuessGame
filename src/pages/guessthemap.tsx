@@ -4,6 +4,7 @@ import ItemBar from '../components/ItemBar'
 import mapsDataJson from '../data/maps.json'
 import { getRandNum } from '../helpers/getRandNum'
 import { useStore } from '../store/index'
+import { Variants, motion } from 'framer-motion'
 
 interface IMapStore {
   id: string
@@ -14,6 +15,15 @@ interface IMap {
   id: string
   name: string
   imgs: string[]
+}
+
+const divVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
 }
 
 export default function guessthemap() {
@@ -64,15 +74,22 @@ export default function guessthemap() {
       <button className='btn mt-2 md:btn-xs' onClick={playRandomHandler}>
         Random
       </button>
-      {mapsDataJson.map((map, index) => (
-        <ItemBar
-          item={map}
-          dataStore={dataStore}
-          index={index}
-          play={playHandler}
-          key={map.id}
-        />
-      ))}
+      <motion.div
+        variants={divVariants}
+        initial='hidden'
+        animate='visible'
+        className='flex flex-col w-full items-center justify-center'
+      >
+        {mapsDataJson.map((map, index) => (
+          <ItemBar
+            item={map}
+            dataStore={dataStore}
+            index={index}
+            play={playHandler}
+            key={map.id}
+          />
+        ))}
+      </motion.div>
     </div>
   )
 }

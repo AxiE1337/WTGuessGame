@@ -1,4 +1,5 @@
 import { memo } from 'react'
+import { Variants, motion } from 'framer-motion'
 
 interface IDataStore {
   id: string
@@ -11,6 +12,15 @@ interface IItem {
   dataStore: IDataStore[]
   play: (id: string) => void
   index: number
+}
+
+const itemVariants: Variants = {
+  hidden: { x: -100, y: -100, opacity: 0 },
+  visible: {
+    x: 0,
+    y: 0,
+    opacity: 1,
+  },
 }
 
 function ItemBar({ item, dataStore, play, index }: IItem) {
@@ -48,38 +58,36 @@ function ItemBar({ item, dataStore, play, index }: IItem) {
   }
 
   return (
-    <>
-      <div className='flex w-4/6 h-16 rounded items-center justify-between mt-2 p-2 bg-slate-600 dark:bg-sky-900 hover:scale-110 ease-out duration-300 hover:bg-sky-800 md:w-11/12'>
-        <p className='text-white md:text-sm'>#{index + 1}</p>
-        <div className='flex items-center justify-between gap-4 pr-2 text-white md:text-xs md:p-0 md:gap-2'>
-          <h1 className={`${color()} font-bold select-none`}>{gameState()}</h1>
-          <h1 className='select-none'>
-            {String(updatedItem?.guesses) === 'undefined' && 'unplayed'}
-          </h1>
-          <div className='flex gap-1'>
-            {String(updatedItem?.guesses) !== 'undefined' && autocompleteBar()}
-          </div>
-          <p>{gameState() === 'win' && `Points: ${updatedItem?.guesses}`}</p>
-          <p>
-            {String(updatedItem?.guesses) !== 'undefined' &&
-              `Guesses remaining: ${updatedItem?.guesses}`}
-          </p>
-          {updatedItem?.name && (
-            <h1>
-              {updatedItem.name ? updatedItem.name.toLocaleUpperCase() : 'loss'}
-            </h1>
-          )}
-          {gameState() === '' && (
-            <button
-              className='btn glass md:btn-sm'
-              onClick={() => play(item.id)}
-            >
-              play
-            </button>
-          )}
+    <motion.div
+      variants={itemVariants}
+      className='flex w-4/6 h-16 rounded items-center justify-between mt-2 p-2 bg-slate-600 dark:bg-sky-900 hover:scale-110 ease-out duration-300 hover:bg-sky-800 md:w-11/12'
+    >
+      <p className='text-white md:text-sm'>#{index + 1}</p>
+      <div className='flex items-center justify-between gap-4 pr-2 text-white md:text-xs md:p-0 md:gap-2'>
+        <h1 className={`${color()} font-bold select-none`}>{gameState()}</h1>
+        <h1 className='select-none'>
+          {String(updatedItem?.guesses) === 'undefined' && 'unplayed'}
+        </h1>
+        <div className='flex gap-1'>
+          {String(updatedItem?.guesses) !== 'undefined' && autocompleteBar()}
         </div>
+        <p>{gameState() === 'win' && `Points: ${updatedItem?.guesses}`}</p>
+        <p>
+          {String(updatedItem?.guesses) !== 'undefined' &&
+            `Guesses remaining: ${updatedItem?.guesses}`}
+        </p>
+        {updatedItem?.name && (
+          <h1>
+            {updatedItem.name ? updatedItem.name.toLocaleUpperCase() : 'loss'}
+          </h1>
+        )}
+        {gameState() === '' && (
+          <button className='btn glass md:btn-sm' onClick={() => play(item.id)}>
+            play
+          </button>
+        )}
       </div>
-    </>
+    </motion.div>
   )
 }
 

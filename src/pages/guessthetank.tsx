@@ -4,6 +4,7 @@ import tanksDataJson from '../data/tanks.json'
 import ItemBar from '../components/ItemBar'
 import GuessScreen from '../components/GuessScreen'
 import { getRandNum } from '../helpers/getRandNum'
+import { Variants, motion } from 'framer-motion'
 
 interface ITankStore {
   id: string
@@ -14,6 +15,15 @@ interface ITank {
   id: string
   name: string
   imgs: string[]
+}
+
+const divVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
 }
 
 export default function Guessatank() {
@@ -64,15 +74,22 @@ export default function Guessatank() {
       <button className='btn mt-2 md:btn-xs' onClick={playRandomHandler}>
         Random
       </button>
-      {tanksDataJson.map((tank, index) => (
-        <ItemBar
-          item={tank}
-          dataStore={dataStore}
-          index={index}
-          play={playHandler}
-          key={tank.id}
-        />
-      ))}
+      <motion.div
+        variants={divVariants}
+        initial='hidden'
+        animate='visible'
+        className='flex flex-col w-full items-center justify-center'
+      >
+        {tanksDataJson.map((tank, index) => (
+          <ItemBar
+            item={tank}
+            dataStore={dataStore}
+            index={index}
+            play={playHandler}
+            key={tank.id}
+          />
+        ))}
+      </motion.div>
     </div>
   )
 }
