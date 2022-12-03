@@ -5,6 +5,7 @@ export default function Document() {
     <Html data-theme='dark' className='dark'>
       <Head>
         <meta name='description' content='Guess the tank/map War thunder' />
+        <link rel='manifest' href='/manifest.json' />
         <link rel='icon' href='/favicon.ico' />
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link rel='preconnect' href='https://fonts.gstatic.com' />
