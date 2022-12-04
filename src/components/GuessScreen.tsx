@@ -2,6 +2,7 @@ import React, { memo, useMemo, useState } from 'react'
 import Image from 'next/image'
 import Input from './ui/Input'
 import Helper from './ui/Helper'
+import CancelBtn from './ui/CancelBtn'
 import { useStore } from '../store/index'
 import { motion, AnimatePresence, Variants } from 'framer-motion'
 import { autoCompleteData } from '../data/autocomplete'
@@ -57,9 +58,9 @@ interface IItem {
 }
 
 function GuessScreen({ item, current, type }: IItem) {
+  const { updateItem, tanks, maps, getPoints } = useStore((state) => state)
   const [[imgIndex, direction], setImgIndex] = useState<number[]>([0, 0])
   const [inputValue, setInputValue] = useState<string>('')
-  const { updateItem, tanks, maps, getPoints } = useStore((state) => state)
   const [subAnim, setSubAnim] = useState<string>('')
   const [isAnimating, setIsAnimating] = useState<boolean>(false)
   const guesses = useMemo(
@@ -129,6 +130,7 @@ function GuessScreen({ item, current, type }: IItem) {
 
   return (
     <div className='flex flex-col h-screen w-full items-center justify-center dark:bg-gray-800'>
+      <CancelBtn onClick={() => current({ id: '', name: '', imgs: [] })} />
       <AnimatePresence initial={false} custom={direction}>
         <div className='relative flex items-center justify-center h-2/4 w-4/5 overflow-hidden md:w-full'>
           <motion.div

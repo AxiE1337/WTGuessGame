@@ -53,8 +53,9 @@ export default function Guessatank() {
     const maxValue = filteredArr.length - 1
     const randItem = filteredArr[getRandNum(minValue, maxValue)]
     if (randItem) {
-      playHandler(randItem.id)
+      return playHandler(randItem.id)
     }
+    return alert('No games available')
   }, [])
 
   useEffect(() => {
