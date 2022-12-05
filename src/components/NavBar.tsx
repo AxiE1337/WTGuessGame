@@ -4,6 +4,7 @@ import { useTheme } from '../store/themeMode'
 import { useRouter } from 'next/router'
 import Modal from './ui/Modal'
 import SwapBtn from './ui/SwapBtn'
+import HamburgerBtn from './ui/HamburgerBtn'
 
 interface IStats {
   guessedRight: number
@@ -23,7 +24,7 @@ const statsInitialState: IStats = {
 }
 
 function NavBar() {
-  const [hover, setHover] = useState<boolean>(false)
+  const [menuOpen, setMenuOpen] = useState<boolean>(false)
   const [stats, setStats] = useState<IStats>(statsInitialState)
   const { tanks, maps, points: storePoints } = useStore((state) => state)
   const { mode: themeMode, changeMode } = useTheme((state) => state)
@@ -47,35 +48,33 @@ function NavBar() {
     })
   }, [tanks, maps])
 
+  const handleMenu = () => {
+    setMenuOpen((prev) => !prev)
+  }
+
+  const menuContent = (
+    <div
+      className={`menu bg-gray-700 dark:bg-sky-900 rounded w-fit ml-4 md:text-xs ${
+        menuOpen ? '' : 'hidden'
+      }`}
+      onClick={handleMenu}
+    >
+      <li onClick={() => router.push('/guessthetank')}>
+        <a className='p-2 md:p-1'>Guess the tank</a>
+      </li>
+      <li onClick={() => router.push('/guessthemap')}>
+        <a className='p-2 md:p-1'>Guess the map</a>
+      </li>
+      <li onClick={() => router.push('/')}>
+        <a className='p-2 md:p-1'>Main</a>
+      </li>
+    </div>
+  )
+
   return (
     <div className='navbar dark:bg-sky-900 dark:border-gray-700 border-b-2 fixed md:relative'>
-      <div className='flex-1 text-white'>
-        <div
-          className='dropdown dropdown-hover'
-          onMouseEnter={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
-        >
-          <label
-            className='ml-2 swap swap-rotate text-xl text-center text-black dark:text-white'
-            onClick={() => router.push('/')}
-          >
-            <input type='checkbox' disabled />
-            <div className={`swap-${hover ? 'off' : 'on'}`}>Menu</div>
-            <div className={`swap-${hover ? 'on' : 'off'}`}>↓</div>
-          </label>
-          <ul
-            tabIndex={0}
-            className='dropdown-content menu p-1 shadow bg-gray-700 dark:bg-sky-900 w-52'
-          >
-            <li onClick={() => router.push('/guessthetank')}>
-              <a>Guess the tank</a>
-            </li>
-            <li onClick={() => router.push('/guessthemap')}>
-              <a>Guess the map</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <HamburgerBtn onClick={handleMenu} open={menuOpen} />
+      <div className='flex-1 text-white'>{menuOpen && menuContent}</div>
       <label htmlFor='my-modal-4' className='btn btn-xs mx-4'>
         stats
       </label>
