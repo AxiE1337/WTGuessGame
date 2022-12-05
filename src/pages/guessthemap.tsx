@@ -72,14 +72,14 @@ export default function guessthemap() {
 
   return (
     <div className='flex flex-col min-h-screen items-center justify-center dark:bg-gray-800 pb-2'>
-      <button className='btn mt-2 md:btn-xs' onClick={playRandomHandler}>
+      <button className='btn mt-4 md:btn-xs' onClick={playRandomHandler}>
         Random
       </button>
       <motion.div
         variants={divVariants}
         initial='hidden'
         animate='visible'
-        className='flex flex-col w-full items-center justify-center'
+        className='flex flex-col w-full items-center justify-center mt-4'
       >
         {mapsDataJson.map((map, index) => (
           <ItemBar

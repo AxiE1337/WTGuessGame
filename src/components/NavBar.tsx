@@ -48,14 +48,17 @@ function NavBar() {
   }, [tanks, maps])
 
   return (
-    <div className='navbar dark:bg-sky-900 border-b-2 border-gray-800'>
+    <div className='navbar dark:bg-sky-900 dark:border-gray-700 border-b-2 fixed md:relative'>
       <div className='flex-1 text-white'>
         <div
           className='dropdown dropdown-hover'
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
         >
-          <label className='ml-2 swap swap-rotate text-xl text-center text-black dark:text-white'>
+          <label
+            className='ml-2 swap swap-rotate text-xl text-center text-black dark:text-white'
+            onClick={() => router.push('/')}
+          >
             <input type='checkbox' disabled />
             <div className={`swap-${hover ? 'off' : 'on'}`}>Menu</div>
             <div className={`swap-${hover ? 'on' : 'off'}`}>↓</div>
