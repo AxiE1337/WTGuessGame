@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         <meta name='description' content='Guess the tank/map War thunder' />
         <link rel='manifest' href='/manifest.json' />
-        <link rel='icon' href='/favicon.ico' />
+        <link rel='icon' href='/icon-256x256.png' />
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link rel='preconnect' href='https://fonts.gstatic.com' />
         <link

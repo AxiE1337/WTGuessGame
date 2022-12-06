@@ -166,6 +166,7 @@ function GuessScreen({ item, current, type }: IItem) {
             name='radio-1'
             className='radio radio-info ml-2'
             onClick={() => setImgIndex((prev) => [index, index - prev[0]])}
+            checked={index === imgIndex}
             disabled={item.imgs.length - guesses < index}
           />
         ))}
