@@ -54,9 +54,7 @@ function NavBar() {
 
   const menuContent = (
     <div
-      className={`menu bg-gray-700 dark:bg-sky-900 rounded w-fit ml-4 md:text-xs ${
-        menuOpen ? '' : 'hidden'
-      }`}
+      className='menu bg-gray-700 dark:bg-sky-900 rounded w-fit ml-4 md:text-xs'
       onClick={handleMenu}
     >
       <li onClick={() => router.push('/guessthetank')}>
@@ -75,18 +73,8 @@ function NavBar() {
     <div className='navbar dark:bg-sky-900 dark:border-gray-700 border-b-2 fixed md:relative'>
       <HamburgerBtn onClick={handleMenu} open={menuOpen} />
       <div className='flex-1 text-white'>{menuOpen && menuContent}</div>
-      <label htmlFor='my-modal-4' className='btn btn-xs mx-4'>
-        stats
-      </label>
-      <SwapBtn
-        onChange={(e) => {
-          changeThemeMode(e.target.value)
-        }}
-        value={themeMode}
-        checked={themeMode === 'dark' ? false : true}
-      />
       <Modal>
-        <div className='flex flex-col gap-4'>
+        <div className='flex flex-col gap-4 px-5 py-3'>
           <h1>{`Points ${stats.points}`}</h1>
           <h1>{'Guessed right ' + stats.guessedRight}</h1>
           <h1>{`Tanks guessed right ${stats.guessedTanks}`}</h1>
@@ -95,6 +83,13 @@ function NavBar() {
           <h1>{`Losses ${stats.losses}`}</h1>
         </div>
       </Modal>
+      <SwapBtn
+        onChange={(e) => {
+          changeThemeMode(e.target.value)
+        }}
+        value={themeMode}
+        checked={themeMode === 'dark' ? false : true}
+      />
     </div>
   )
 }

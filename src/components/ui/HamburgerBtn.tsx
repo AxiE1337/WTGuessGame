@@ -7,7 +7,7 @@ interface IHamburgerBtn {
 
 function HamburgerBtn({ onClick, open }: IHamburgerBtn) {
   return (
-    <label className='btn btn-circle swap swap-rotate md:btn-sm'>
+    <label className='btn btn-ghost btn-circle swap swap-rotate md:btn-sm'>
       <input type='checkbox' checked={open} onChange={onClick} />
       <svg
         className='swap-off fill-current'
