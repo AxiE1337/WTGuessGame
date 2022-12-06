@@ -5,6 +5,7 @@ import ItemBar from '../components/ItemBar'
 import GuessScreen from '../components/GuessScreen'
 import { getRandNum } from '../helpers/getRandNum'
 import { Variants, motion } from 'framer-motion'
+import Head from 'next/head'
 
 interface ITankStore {
   id: string
@@ -72,6 +73,9 @@ export default function Guessatank() {
 
   return (
     <div className='flex flex-col min-h-screen items-center justify-center dark:bg-gray-800 pb-2'>
+      <Head>
+        <title>Guess the tank</title>
+      </Head>
       <button className='btn mt-4 md:btn-xs' onClick={playRandomHandler}>
         Random
       </button>

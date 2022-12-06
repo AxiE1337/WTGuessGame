@@ -5,6 +5,7 @@ import mapsDataJson from '../data/maps.json'
 import { getRandNum } from '../helpers/getRandNum'
 import { useStore } from '../store/index'
 import { Variants, motion } from 'framer-motion'
+import Head from 'next/head'
 
 interface IMapStore {
   id: string
@@ -72,6 +73,9 @@ export default function guessthemap() {
 
   return (
     <div className='flex flex-col min-h-screen items-center justify-center dark:bg-gray-800 pb-2'>
+      <Head>
+        <title>Guess the map</title>
+      </Head>
       <button className='btn mt-4 md:btn-xs' onClick={playRandomHandler}>
         Random
       </button>
