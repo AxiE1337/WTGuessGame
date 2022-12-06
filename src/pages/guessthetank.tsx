@@ -57,7 +57,7 @@ export default function Guessatank() {
       return playHandler(randItem.id)
     }
     return alert('No games available')
-  }, [])
+  }, [current])
 
   useEffect(() => {
     setDataStore(tanksDataStore)

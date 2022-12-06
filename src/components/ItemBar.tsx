@@ -57,9 +57,14 @@ function ItemBar({ item, dataStore, play, index }: IItem) {
     ))
   }
 
+  const isMobile =
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    )
+
   return (
     <motion.div
-      variants={itemVariants}
+      variants={isMobile ? {} : itemVariants}
       className='flex w-4/6 h-16 rounded items-center justify-between mt-2 p-2 bg-slate-600 dark:bg-sky-900 hover:scale-110 ease-out duration-300 hover:bg-sky-800 md:w-11/12'
     >
       <p className='text-white md:text-sm'>#{index + 1}</p>

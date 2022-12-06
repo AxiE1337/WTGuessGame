@@ -57,7 +57,7 @@ export default function guessthemap() {
       return playHandler(randItem.id)
     }
     return alert('No games available')
-  }, [])
+  }, [current])
 
   useEffect(() => {
     setData(mapsDataStore)
