@@ -65,7 +65,9 @@ function ItemBar({ item, dataStore, play, index }: IItem) {
   return (
     <motion.div
       variants={isMobile ? {} : itemVariants}
-      className='flex w-4/6 h-16 rounded items-center justify-between mt-2 p-2 bg-slate-600 dark:bg-sky-900 hover:scale-110 ease-out duration-300 hover:bg-sky-800 md:w-11/12'
+      className={`flex w-4/6 h-16 rounded items-center justify-between mt-2 p-2 bg-slate-600 dark:bg-sky-900 ${
+        isMobile ? '' : 'hover:scale-110'
+      } ease-out duration-300 hover:bg-sky-800 md:w-11/12`}
     >
       <p className='text-white md:text-sm'>#{index + 1}</p>
       <div className='flex items-center justify-between gap-4 pr-2 text-white md:text-xs md:p-0 md:gap-2'>

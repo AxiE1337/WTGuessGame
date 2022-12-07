@@ -89,6 +89,7 @@ function GuessScreen({ item, current, type }: IItem) {
   const submitHandler = async () => {
     const isWin = item.name === inputValue
     if (inputValue.length < 1) return
+    navigator.vibrate(200)
     if (!isWin) {
       setInputValue('')
       await submitAnimation('animateLoss')?.then(() => {
@@ -150,8 +151,7 @@ function GuessScreen({ item, current, type }: IItem) {
               className='rounded-xl'
               alt={item.id}
               src={item.imgs[imgIndex]}
-              placeholder='blur'
-              blurDataURL={item.imgs[imgIndex]}
+              priority
               width={800}
               height={450}
             />
