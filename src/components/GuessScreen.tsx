@@ -147,14 +147,16 @@ function GuessScreen({ item, current, type }: IItem) {
             }}
             className='absolute rounded-xl m-4 h-auto w-auto'
           >
-            <Image
-              className='rounded-xl'
-              alt={item.id}
-              src={item.imgs[imgIndex]}
-              priority
-              width={800}
-              height={450}
-            />
+            <div className='w-full h-full bg-black-rgba rounded-xl'>
+              <Image
+                className='rounded-xl'
+                alt={item.id}
+                src={item.imgs[imgIndex]}
+                priority
+                width={800}
+                height={450}
+              />
+            </div>
           </motion.div>
         </div>
       </AnimatePresence>

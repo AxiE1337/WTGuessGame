@@ -7,7 +7,11 @@ module.exports = {
     './src/components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'black-rgba': 'rgba(0, 0, 0, 0.2)',
+      },
+    },
     screens: {
       md: { max: '768px' },
     },
