@@ -197,7 +197,11 @@ function GuessScreen({ item, current, type }: IItem) {
           >
             Submit
           </motion.button>
-          <button className='btn md:btn-sm' onClick={skipHandler}>
+          <button
+            className='btn md:btn-sm'
+            disabled={guesses <= 1}
+            onClick={skipHandler}
+          >
             Skip
           </button>
         </div>
