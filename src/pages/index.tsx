@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div className='flex flex-col min-h-screen items-center justify-center dark:bg-gray-800'>
       <Head>
-        <title>War thunder guess game</title>
+        <title>War thunder guess the tank game</title>
       </Head>
       <div className='h-screen w-full flex items-center justify-center md:flex-col'>
         <div

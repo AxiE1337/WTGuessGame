@@ -2,9 +2,9 @@ import React, { memo, useEffect, useState } from 'react'
 import { useStore } from '../store/index'
 import { useTheme } from '../store/themeMode'
 import { useRouter } from 'next/router'
+import arrowLeft from '../components/ui/arrowLeft'
 import Modal from './ui/Modal'
 import SwapBtn from './ui/SwapBtn'
-import HamburgerBtn from './ui/HamburgerBtn'
 
 interface IStats {
   guessedRight: number
@@ -71,7 +71,14 @@ function NavBar() {
 
   return (
     <div className='navbar dark:bg-sky-900 dark:border-gray-700 border-b-2 fixed md:relative'>
-      <HamburgerBtn onClick={handleMenu} open={menuOpen} />
+      {router.pathname !== '/' && (
+        <div
+          className='w-10 h-10 cursor-pointer'
+          onClick={() => router.push('/')}
+        >
+          {arrowLeft}
+        </div>
+      )}
       <div className='flex-1 text-white'>{menuOpen && menuContent}</div>
       <Modal>
         <div className='flex flex-col gap-4 px-5 py-3'>
