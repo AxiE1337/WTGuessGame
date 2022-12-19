@@ -73,17 +73,6 @@ function GuessScreen({ item, current, type }: IItem) {
       setImgIndex([imgIndex + 1, 1])
       updateItem({ id: item.id, guesses: guesses - 1 }, type)
     }
-    if (guesses - 1 < 1) {
-      updateItem(
-        {
-          id: item.id,
-          guesses: guesses - 1,
-        },
-        type
-      )
-      setInputValue('')
-      current({ id: '', name: '', imgs: [] })
-    }
   }
 
   const submitHandler = async () => {
@@ -93,7 +82,15 @@ function GuessScreen({ item, current, type }: IItem) {
     if (!isWin) {
       setInputValue('')
       await submitAnimation('animateLoss')?.then(() => {
-        skipHandler()
+        updateItem(
+          {
+            id: item.id,
+            guesses: 0,
+          },
+          type
+        )
+        setInputValue('')
+        current({ id: '', name: '', imgs: [] })
       })
     } else {
       setInputValue('')
