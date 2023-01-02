@@ -17,7 +17,7 @@ export default function Home() {
         >
           <Image
             alt='pt-76-57_1'
-            src='/tanks/pt-76-57_1.png'
+            src='https://i.postimg.cc/GmNwCHLx/pt-76-57-1.png'
             className='object-cover blur-sm scale-105 opacity-80 hover:blur-none hover:opacity-100 hover:scale-125 hover:z-20 ease-in-out duration-200'
             fill
             priority
@@ -31,7 +31,7 @@ export default function Home() {
         >
           <Image
             alt='abandonedtown_1'
-            src='/maps/abandonedtown_1.png'
+            src='https://i.postimg.cc/L4cfcVt1/abandonedtown-1.png'
             className='object-cover blur-sm scale-105 opacity-80 hover:blur-none hover:opacity-100 hover:scale-125 hover:z-20 ease-in-out duration-200'
             fill
             priority

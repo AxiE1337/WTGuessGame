@@ -3,27 +3,27 @@
     "id": "zvGwrC6KGU",
     "name": "abandoned town",
     "imgs": [
-      "/maps/abandonedtown_1.png",
-      "/maps/abandonedtown_2.png",
-      "/maps/abandonedtown_3.png"
+      "https://i.postimg.cc/L4cfcVt1/abandonedtown-1.png",
+      "https://i.postimg.cc/fLSBMRJW/abandonedtown-2.png",
+      "https://i.postimg.cc/brXLrftx/abandonedtown-3.png"
     ]
   },
   {
     "id": "7ZmA434bvC",
     "name": "eastern europe",
     "imgs": [
-      "/maps/easterneurope_1.png",
-      "/maps/easterneurope_2.png",
-      "/maps/easterneurope_3.png"
+      "https://i.postimg.cc/5NBKHyp6/easterneurope-1.png",
+      "https://i.postimg.cc/MK2rKV7C/easterneurope-2.png",
+      "https://i.postimg.cc/pd6sNFV1/easterneurope-3.png"
     ]
   },
   {
     "id": "ZGPD8Pi8tt",
     "name": "advance to the rhine",
     "imgs": [
-      "/maps/advancetotherhine_1.png",
-      "/maps/advancetotherhine_2.png",
-      "/maps/advancetotherhine_3.png"
+      "https://i.postimg.cc/MZjFSdQ0/advancetotherhine-1.png",
+      "https://i.postimg.cc/MptsDLCw/advancetotherhine-2.png",
+      "https://i.postimg.cc/g2GS3pB4/advancetotherhine-3.png"
     ]
   }
 ]

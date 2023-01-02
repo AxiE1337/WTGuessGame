@@ -3,86 +3,90 @@
     "id": "c_RaFvpH-R",
     "name": "t-34-85-zis",
     "imgs": [
-      "/tanks/t-34-85-zis_1.png",
-      "/tanks/t-34-85-zis_2.png",
-      "/tanks/t-34-85-zis_3.png"
+      "https://i.postimg.cc/SRmHr9dk/t-34-85-zis-1.png",
+      "https://i.postimg.cc/L66rgzhV/t-34-85-zis-2.png",
+      "https://i.postimg.cc/5yPKSRjS/t-34-85-zis-3.png"
     ]
   },
   {
     "id": "kgHBFSSen9",
     "name": "tiger-h1",
     "imgs": [
-      "/tanks/tiger-h1_1.png",
-      "/tanks/tiger-h1_2.png",
-      "/tanks/tiger-h1_3.png"
+      "https://i.postimg.cc/BbwNKPwh/tiger-h1-1.png",
+      "https://i.postimg.cc/Gp1KGCq1/tiger-h1-2.png",
+      "https://i.postimg.cc/k4JyYv01/tiger-h1-3.png"
     ]
   },
   {
     "id": "gHAPRU72si",
     "name": "m4a3e2-76-jumbo",
     "imgs": [
-      "/tanks/m4a3e2-76-jumbo_1.png",
-      "/tanks/m4a3e2-76-jumbo_2.png",
-      "/tanks/m4a3e2-76-jumbo_3.png"
+      "https://i.postimg.cc/0QhbK80Y/m4a3e2-76-jumbo-1.png",
+      "https://i.postimg.cc/287SrdMF/m4a3e2-76-jumbo-2.png",
+      "https://i.postimg.cc/63CNztNL/m4a3e2-76-jumbo-3.png"
     ]
   },
   {
     "id": "82AuKxegOq",
     "name": "m4a3-76",
     "imgs": [
-      "/tanks/m4a3-76_1.png",
-      "/tanks/m4a3-76_2.png",
-      "/tanks/m4a3-76_3.png"
+      "https://i.postimg.cc/J0cM7m64/m4a3-76-1.png",
+      "https://i.postimg.cc/nrvcsqzx/m4a3-76-2.png",
+      "https://i.postimg.cc/L5MmMhVb/m4a3-76-3.png"
     ]
   },
   {
     "id": "Z5UKgzGr-X",
     "name": "m4a2-76",
     "imgs": [
-      "/tanks/m4a2-76_1.png",
-      "/tanks/m4a2-76_2.png",
-      "/tanks/m4a2-76_3.png"
+      "https://i.postimg.cc/PqPXWgx2/m4a2-76-1.png",
+      "https://i.postimg.cc/NMXQVRRX/m4a2-76-2.png",
+      "https://i.postimg.cc/N0Sgpd2Y/m4a2-76-3.png"
     ]
   },
   {
     "id": "af27mNYTul",
     "name": "t-34-85-d5t",
     "imgs": [
-      "/tanks/t-34-85-d5t_1.png",
-      "/tanks/t-34-85-d5t_2.png",
-      "/tanks/t-34-85-d5t_3.png"
+      "https://i.postimg.cc/h4bBdDsK/t-34-85-d5t-1.png",
+      "https://i.postimg.cc/7hDrWdHv/t-34-85-d5t-2.png",
+      "https://i.postimg.cc/0jf1Rnjz/t-34-85-d5t-3.png"
     ]
   },
   {
     "id": "k4rCTQQvs2",
     "name": "pt-76-57",
     "imgs": [
-      "/tanks/pt-76-57_1.png",
-      "/tanks/pt-76-57_2.png",
-      "/tanks/pt-76-57_3.png"
+      "https://i.postimg.cc/GmNwCHLx/pt-76-57-1.png",
+      "https://i.postimg.cc/Z50t2rSq/pt-76-57-2.png",
+      "https://i.postimg.cc/4dkDYqhK/pt-76-57-3.png"
     ]
   },
   {
     "id": "hd8_-hxgJd",
     "name": "t55e1",
-    "imgs": ["/tanks/t55e1_1.png", "/tanks/t55e1_2.png", "/tanks/t55e1_3.png"]
+    "imgs": [
+      "https://i.postimg.cc/DzqCMZ8Z/t55e1-1.png",
+      "https://i.postimg.cc/B6BVX60y/t55e1-2.png",
+      "https://i.postimg.cc/ydHG1Rwc/t55e1-3.png"
+    ]
   },
   {
     "id": "IMsOn7bZTF",
     "name": "tiger-e",
     "imgs": [
-      "/tanks/tiger-e_1.png",
-      "/tanks/tiger-e_2.png",
-      "/tanks/tiger-e_3.png"
+      "https://i.postimg.cc/nh9SqTxq/tiger-e-1.png",
+      "https://i.postimg.cc/G2KXb5Pn/tiger-e-2.png",
+      "https://i.postimg.cc/yxNvxyng/tiger-e-3.png"
     ]
   },
   {
     "id": "IM13OnfZTF",
     "name": "m4a1-76",
     "imgs": [
-      "/tanks/m4a1-76_1.png",
-      "/tanks/m4a1-76_2.png",
-      "/tanks/m4a1-76_3.png"
+      "https://i.postimg.cc/cCjMHyr2/m4a1-76-1.png",
+      "https://i.postimg.cc/Kcs5QLJf/m4a1-76-2.png",
+      "https://i.postimg.cc/htC47DSX/m4a1-76-3.png"
     ]
   }
 ]
