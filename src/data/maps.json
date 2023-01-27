@@ -9,6 +9,15 @@
     ]
   },
   {
+    "id": "ZGPD8Pi8tt",
+    "name": "advance to the rhine",
+    "imgs": [
+      "https://i.postimg.cc/MZjFSdQ0/advancetotherhine-1.png",
+      "https://i.postimg.cc/MptsDLCw/advancetotherhine-2.png",
+      "https://i.postimg.cc/g2GS3pB4/advancetotherhine-3.png"
+    ]
+  },
+  {
     "id": "7ZmA434bvC",
     "name": "eastern europe",
     "imgs": [
@@ -18,12 +27,21 @@
     ]
   },
   {
-    "id": "ZGPD8Pi8tt",
-    "name": "advance to the rhine",
+    "id": "4WrEtOwZmUBc",
+    "name": "sands of sinai",
     "imgs": [
-      "https://i.postimg.cc/MZjFSdQ0/advancetotherhine-1.png",
-      "https://i.postimg.cc/MptsDLCw/advancetotherhine-2.png",
-      "https://i.postimg.cc/g2GS3pB4/advancetotherhine-3.png"
+      "https://i.postimg.cc/DZYXb8wx/sandsofsinai-1.png",
+      "https://i.postimg.cc/cLMtBDJg/sandsofsinai-2.png",
+      "https://i.postimg.cc/3rVG846R/sandsofsinai-3.png"
+    ]
+  },
+  {
+    "id": "7yN@fChLy2xI",
+    "name": "berlin",
+    "imgs": [
+      "https://i.postimg.cc/4yDHBqtt/berlin-1.png",
+      "https://i.postimg.cc/BnG1DWJf/berlin-2.png",
+      "https://i.postimg.cc/rs0tGMdM/berlin-3.png"
     ]
   }
 ]
