@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { useStore } from '../store/index'
 import { useTheme } from '../store/themeMode'
 import { useRouter } from 'next/router'
@@ -11,6 +11,8 @@ interface IStats {
   guessedTanks: number
   guessedMaps: number
   points: number
+  maxPoints: number
+  poinsDifference: number
   played: number
   losses: number
 }
@@ -19,6 +21,8 @@ const statsInitialState: IStats = {
   guessedTanks: 0,
   guessedMaps: 0,
   points: 0,
+  maxPoints: 0,
+  poinsDifference: 0,
   played: 0,
   losses: 0,
 }
@@ -35,16 +39,26 @@ function NavBar() {
   }
 
   useEffect(() => {
+    const guessedRight =
+      tanks.filter((t) => t.name).length + maps.filter((m) => m.name).length
+    const guessedTanks = tanks.filter((t) => t.name).length
+    const guessedMaps = maps.filter((m) => m.name).length
+    const played = tanks.length + maps.length
+    const losses =
+      tanks.filter((t) => t.guesses === 0).length +
+      maps.filter((m) => m.guesses === 0).length
+    const maxPoints = (guessedRight + losses) * 3
+    const poinsDifference = maxPoints - storePoints
+
     setStats({
-      guessedRight:
-        tanks.filter((t) => t.name).length + maps.filter((m) => m.name).length,
-      guessedTanks: tanks.filter((t) => t.name).length,
-      guessedMaps: maps.filter((m) => m.name).length,
+      guessedRight: guessedRight,
+      guessedTanks: guessedTanks,
+      guessedMaps: guessedMaps,
       points: storePoints,
-      played: tanks.length + maps.length,
-      losses:
-        tanks.filter((t) => t.guesses === 0).length +
-        maps.filter((m) => m.guesses === 0).length,
+      maxPoints: maxPoints,
+      poinsDifference: poinsDifference,
+      played: played,
+      losses: losses,
     })
   }, [tanks, maps])
 
@@ -69,6 +83,19 @@ function NavBar() {
     </div>
   )
 
+  const pointsComment = () => {
+    if (stats.poinsDifference <= 1) {
+      return <h1>You absolutely killing it!</h1>
+    }
+    if (stats.poinsDifference <= 3) {
+      return <h1>You have a good knowledge of the game!</h1>
+    }
+    if (stats.poinsDifference <= 9) {
+      return <h1>Well at least you know something!</h1>
+    }
+    return <h1>You are really bad lol!</h1>
+  }
+
   return (
     <div className='navbar dark:bg-sky-900 dark:border-gray-700 border-b-2 fixed md:relative'>
       {router.pathname !== '/' && (
@@ -80,6 +107,7 @@ function NavBar() {
         </div>
       )}
       <div className='flex-1 text-white'>{menuOpen && menuContent}</div>
+      <div>{stats.guessedRight + stats.losses > 1 && pointsComment()}</div>
       <Modal>
         <div className='flex flex-col gap-4 px-5 py-3'>
           <h1>{`Points ${stats.points}`}</h1>

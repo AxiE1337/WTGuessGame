@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useState } from 'react'
+import { memo, useMemo, useState } from 'react'
 import Image from 'next/image'
 import Input from './ui/Input'
 import Helper from './ui/Helper'
