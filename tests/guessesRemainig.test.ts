@@ -5,13 +5,13 @@ import { guessesRemaining } from '../src/helpers/guessesRemaining'
 const example = [{ id: 'c_RaFvpH-R', guesses: 3, name: 't-34-85-zis' }]
 
 describe('guessesRemaining', () => {
-  it('should return undefined because arrays empty', () => {
+  it('should return undefined because array is empty', () => {
     expect(guessesRemaining([], [], 'map', '')).toBe(undefined)
   })
   it('should return undefined because no id', () => {
     expect(guessesRemaining(example, example, 'map', '')).toBe(undefined)
   })
-  it('should return undefined because arrays maps arrays empty', () => {
+  it('should return undefined because maps array is empty', () => {
     expect(guessesRemaining(example, [], 'map', 'c_RaFvpH-R')).toBe(undefined)
   })
   it('should return 3', () => {

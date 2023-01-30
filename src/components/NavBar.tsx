@@ -83,7 +83,7 @@ function NavBar() {
     </div>
   )
 
-  const pointsComment = () => {
+  const scoreComment = () => {
     if (stats.poinsDifference <= 1) {
       return <h1>You absolutely killing it!</h1>
     }
@@ -107,15 +107,17 @@ function NavBar() {
         </div>
       )}
       <div className='flex-1 text-white'>{menuOpen && menuContent}</div>
-      <div>{stats.guessedRight + stats.losses > 1 && pointsComment()}</div>
       <Modal>
         <div className='flex flex-col gap-4 px-5 py-3'>
+          <div>{stats.guessedRight + stats.losses > 1 && scoreComment()}</div>
           <h1>{`Points ${stats.points}`}</h1>
-          <h1>{'Guessed right ' + stats.guessedRight}</h1>
-          <h1>{`Tanks guessed right ${stats.guessedTanks}`}</h1>
-          <h1>{`Maps guessed right ${stats.guessedMaps}`}</h1>
           <h1>{`Played ${stats.played}`}</h1>
-          <h1>{`Losses ${stats.losses}`}</h1>
+          <h1 className='text-green-400'>
+            {'Guessed right ' + stats.guessedRight}
+          </h1>
+          <h1 className='text-green-400'>{`Tanks guessed right ${stats.guessedTanks}`}</h1>
+          <h1 className='text-green-400'>{`Maps guessed right ${stats.guessedMaps}`}</h1>
+          <h1 className='text-red-400'>{`Losses ${stats.losses}`}</h1>
         </div>
       </Modal>
       <SwapBtn

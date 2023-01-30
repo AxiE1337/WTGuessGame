@@ -77,7 +77,7 @@ function ItemBar({ item, dataStore, play, index }: IItem) {
       className='flex w-4/6 h-16 rounded items-center justify-between mt-2 p-2 bg-slate-600 dark:bg-sky-900 md:w-11/12'
     >
       <p className='text-white md:text-sm'>#{index + 1}</p>
-      <div className='flex items-center justify-between gap-4 pr-2 text-white md:text-xs md:p-0 md:gap-2'>
+      <div className='flex items-center justify-between gap-4 pr-2 text-white md:text-xs md:p-0 md:gap-1 md:w-4/5'>
         <h1 className={`${color()} font-bold select-none`}>{gameState()}</h1>
         <h1 className='select-none'>
           {String(updatedItem?.guesses) === 'undefined' && 'unplayed'}
@@ -85,13 +85,15 @@ function ItemBar({ item, dataStore, play, index }: IItem) {
         <div className='flex gap-1'>
           {String(updatedItem?.guesses) !== 'undefined' && autocompleteBar()}
         </div>
-        <p>{gameState() === 'win' && `Points: ${updatedItem?.guesses}`}</p>
-        <p>
+        <p className='text-center'>
+          {gameState() === 'win' && `Points: ${updatedItem?.guesses}`}
+        </p>
+        <p className='text-center'>
           {String(updatedItem?.guesses) !== 'undefined' &&
             `Guesses remaining: ${updatedItem?.guesses}`}
         </p>
         {updatedItem?.name && (
-          <h1>
+          <h1 className='text-center'>
             {updatedItem.name ? updatedItem.name.toLocaleUpperCase() : 'loss'}
           </h1>
         )}
